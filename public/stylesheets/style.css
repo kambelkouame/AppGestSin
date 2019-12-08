@@ -1,0 +1,31 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.nav-item a{
+	color: black !important;
+}
+
+.nav-item{
+	color: black !important;
+	transition: all 0.6s ease
+}
+.nav-item:hover{
+	color: white !important;
+	background-color: orange !important
+}
+
+.navbar {
+	color: white !important;
+	background-color: orange !important;
+	height: 1.5cm;
+}
+
+.active{
+	background-color: orange !important
+}
