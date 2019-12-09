@@ -25,6 +25,13 @@ res.render('user/home', { title: 'Express', data:req.cookies.infoUser})
 }
 });
 
+router.get('/deconnexion', function(req, res, next) {
+	//supprimer la variable cookie user
+	res.clearCookie("infoUser")
+	//retourne la vue connexion
+	res.redirect("/connexionUser")
+});
+
 router.post("/loginUser", function(req, res){
  
   	email= req.body.email,
