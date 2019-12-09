@@ -13,12 +13,12 @@ var fetch =require('node-fetch');
 var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
-router.get('/', function(req, res, next) {
+router.get('/home', function(req, res, next) {
 
 //verification de l'existence de la variable cookie 'user'
-if(req.cookies.user){
+if(req.cookies.infoUser){
 	//si la variable existe retourner la vue dashboard
-res.render('user/home', { title: 'Express'})
+res.render('user/home', { title: 'Express', data:req.cookies.infoUser})
 }else{
 	//sinon retourner connexion
 	res.redirect("/connexionUser")
@@ -26,44 +26,35 @@ res.render('user/home', { title: 'Express'})
 });
 
 router.post("/loginUser", function(req, res){
-  var email= req.body.email;
-  var password = req.body.password;
+ 
+  	email= req.body.email,
+  	password= req.body.password
+ 
 
-  let connexion = mysql.createConnection({
-      host : db.hostname,
-      user : db.username,
-      password : db.password,
-      database : db.dbname,
-      port : db.port,
+
+ let user ={
+   	email:email,
+   	password:password,
+   }
+
+  user = JSON.stringify(user)
+console.log(user)
+  let url = "https://api-master-siin.eu-gb.mybluemix.net/master-siin/auth/login"
+
+  fetch(url, {
+        method: 'post',
+        body:    user,
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(res => res.json())
+    .then(json =>{
+    	if(json.error){
+    		console.log("erreur")
+    	}else{
+    		res.cookie("infoUser",json)
+    		res.redirect("/users/home")
+    	}
     })
 
-console.log(email);
-console.log(password);
-
-  connexion.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
-  if (error) {
-   res.redirect('/connexionUser')
-    // console.log("error ocurred",error);
-   
-  }else{
-    // console.log('The solution is: ', results);
-    if(results.length >0){
-      if(results[0].password == password){
-      	//creation de la variable cookie
-      	res.cookie("user", true)
-      	//retour a la vue user
-		res.redirect('/user')
-        
-      }
-      else{
-       res.redirect('/connexionUser')
-        
-      }
-    }
-    else{
-    	res.redirect('/connexionUser')
-    }
-  }
-  });
 })
 module.exports = router;
