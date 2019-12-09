@@ -23,8 +23,13 @@ fetch('http://localhost:5001/chain')
  ;
 });
 
-router.get('/connexion', function(req, res, next) {
-res.render('connexion', { title: 'Express'})
+
+router.get('/connexionUser', function(req, res, next) {
+res.render('connexionUser', { title: 'Express'})
+});
+
+router.get('/connexionAgent', function(req, res, next) {
+res.render('connexionAgent', { title: 'Express'})
 });
 
 router.get('/deconnexion', function(req, res, next) {
@@ -34,61 +39,6 @@ router.get('/deconnexion', function(req, res, next) {
 	res.redirect("/connexion")
 });
 
-router.get('/user', function(req, res, next) {
-
-//verification de l'existence de la variable cookie 'user'
-if(req.cookies.user){
-	//si la variable existe retourner la vue dashboard
-res.render('user/home', { title: 'Express'})
-}else{
-	//sinon retourner connexion
-	res.redirect("/connexion")
-}
-});
-
-
-
-router.post("/login", function(req, res){
-  var email= req.body.email;
-  var password = req.body.password;
-
-  let connexion = mysql.createConnection({
-      host : db.hostname,
-      user : db.username,
-      password : db.password,
-      database : db.dbname,
-      port : db.port,
-    })
-
-console.log(email);
-console.log(password);
-
-  connexion.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
-  if (error) {
-   res.redirect('/connexion')
-    // console.log("error ocurred",error);
-   
-  }else{
-    // console.log('The solution is: ', results);
-    if(results.length >0){
-      if(results[0].password == password){
-      	//creation de la variable cookie
-      	res.cookie("user", true)
-      	//retour a la vue user
-		res.redirect('/user')
-        
-      }
-      else{
-       res.redirect('/connexion')
-        
-      }
-    }
-    else{
-    	res.redirect('/connexion')
-    }
-  }
-  });
-})
 router.post("/blockInsert", (req,res)=>{
 	let sql ="INSERT INTO blockDonnee  SET ? ";
    		 const donne1=req.body.donne1;
@@ -157,7 +107,7 @@ router.post("/blockInsert", (req,res)=>{
 
 
 
-        fetch(urls, {
+        fetch(url1, {
         method: 'post',
         body:    blockDonees,
         headers: { 'Content-Type': 'application/json' },
