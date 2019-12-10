@@ -15,7 +15,7 @@
 
           <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/dashboard/">
 
-         <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+         <link rel="stylesheet" type="text/css" href="/stylesheets/stylesecond.css">
           <link href="/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
               <!-- Favicons -->
@@ -58,11 +58,11 @@
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><button type="button" class="btn btn-sm btn-outline-secondary"><%= data.client.nom %> <%= data.client.prenom %></button></a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><% data.nom%></a>
   <input class="form-control form-control-dark rounded-0" type="search" placeholder="Search" aria-label="Search">
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link"  href="/users/deconnexion"><button type="button" class="btn btn-sm btn-outline-secondary">Deconnexion</button></a>
+      <a class="nav-link"  href="/users/deconnexion">Deconnexion</a>
     </li>
   </ul>
 </nav>

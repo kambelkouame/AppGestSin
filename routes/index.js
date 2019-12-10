@@ -36,7 +36,7 @@ router.get('/deconnexion', function(req, res, next) {
 	//supprimer la variable cookie user
 	res.clearCookie("user")
 	//retourne la vue connexion
-	res.redirect("/connexion")
+	res.redirect("/connexionUser")
 });
 
 router.post("/blockInsert", (req,res)=>{
