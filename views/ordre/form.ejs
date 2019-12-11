@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="App">
   <head>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -49,134 +49,51 @@
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
   </head>
-  <body class="bg-light">
+  <body class="bg-light" ng-controller = "control">
     <div class="container">
   <div class="py-5 text-center">
     <img class="d-block mx-auto mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h2>Sinistre Auto</h2>
+    <h2>Constat de police</h2>
   </div>
 
   <div class="row p-4">
     <div class="col-md-4 order-md-2 mb-4">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted">Numero de sinistre</span>
+        <span class="text-muted">Numero de police</span>
       </h4>
       
 
       <form class="card p-2">
         <div class="input-group">
-          <input type="text" class="form-control border-0" readonly placeholder="N° 85-GTuhF5">
+          <input type="text" class="form-control border-0" readonly placeholder="<%= numero_police %>">
         </div>
       </form>
     </div>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Information prerequises</h4>
-      <form class="needs-validation" novalidate>
+      <form method="post" action="send">
         <div class="row">
           <div class="col-md-5 mb-3">
-            <label for="country">Type de sinistre</label>
-            <select class="custom-select d-block w-100" id="country" required>
-              <option value="vol">Vol</option>
-              <option value="recours anticipe">Recours anticipé</option>
-              <option value="bris de glace">Bris de glace</option>
-              <option value="accident">Accident</option>
-              <option value="sinistre corporel">Sinistre corporel</option>
-              <option value="maladie">Maladie</option>
-            </select>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="state">Localisation</label>
-            <select class="custom-select" id="state" required>
-              <option value=""></option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="firstName">Matriculation</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <input type="hidden" name="nom" value="<%= infoAgent.nom %>">
+            <input type="hidden" name="prenom" value="<%= infoAgent.prenoms %>">
+             <input type="hidden" name="num_police" value="<%= numero_police %>">
+            <label for="firstName">Votre avis</label><br>
+            <textarea name="avis" required=""></textarea>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="firstName">nb personnes mortes</label>
-            <input type="number" class="form-control" required>
+            <label for="firstName">constat</label>
+            <input type="file" name="constat" class="form-control" required>
           </div>
-          <div class="col-md-6 mb-3">
-            <label for="firstName">nb personnes blessées</label>
-            <input type="number" class="form-control" required>
-          </div>
-        </div>
-        <hr class="mb-4">
-        <h3>Importer</h3>
-        <div class="row">
-            <div class="col-md-12 mb-3">
-            <label for="zip">Photo/video de l'incident</label>
-            <input type="file" class="form-control-plaintext" id="zip" placeholder="" required>
-          </div>
-          <div class="col-12 mb-3">
-            <label for="zip">Facture (image/pdf)</label>
-            <input type="file" class="custom-file" id="zip" placeholder="" required>
-          </div>
-            <div class="col-12 mb-3">
-            <label for="zip">Constat (image/pdf)</label>
-            <input type="file" class="custom-file" id="zip" placeholder="" required>
-          </div>
-        </div>
 
-        
-        <hr class="mb-4">
-        <h3>Actions</h3>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input"  ng-model="constat" id="same-address">
-          <label class="custom-control-label" for="same-address">Demande de constat</label>
         </div>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="save-info">
-          <label class="custom-control-label" for="save-info">Demande de remorquage</label>
-        </div>
-        <hr class="mb-4">
-  <div ng-show="constat">
-        <h4 class="mb-3" >Paiement constat</h4>
-
-        <div class="d-block my-3">
-          <div class="custom-control custom-radio">
-            <input id="credit" name="paymentMethod" ng-model="paiement" value="mobile money" type="radio" class="custom-control-input" required>
-            <label class="custom-control-label" for="credit">Mobile money</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input id="debit" name="paymentMethod" ng-model="paiement" value="carte"  type="radio" class="custom-control-input" required>
-            <label class="custom-control-label" for="debit">Carte de credit</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input id="paypal" name="paymentMethod" ng-model="paiement" value="espece" type="radio" class="custom-control-input" required>
-            <label class="custom-control-label" for="paypal">Especes</label>
-          </div>
-        </div>
-      </div>
-
-      <div ng-switch="paiement" >
-        <div class="row" ng-switch-when="carte">
-        <div class="col-md-5 mb-3">
-            <label for="country">Type de carte</label>
-            <select class="custom-select d-block w-100" id="country" required>
-              <option value="MBA">MBA</option>
-              <option value="Master card">Master card</option>
-              <option value="Visa">Visa card</option>
-              <option value="Abidjan.NET">Abidjan.net</option>
-            </select>
-          </div>
-           <div class="col-md-5 mb-3">
-            <label for="country">numero de carte</label>
-            <input type="text" class="form-input-plaintext border p-2" id="numberCard" required>
-             
-          </div>
-        </div>
-      </div>
         <button class="btn btn-success btn-lg btn-block rounded-0" type="submit">Valider l'ajout de sinistre</button>
       </form>
     </div>
   </div>
 
 </div>
+<script src="/javascripts/angular.js" type="text/javascript"></script>
+<script src="/javascripts/main.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
         <script src="form-validation.js"></script></body>

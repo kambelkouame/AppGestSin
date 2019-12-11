@@ -12,8 +12,8 @@
     <p class="text-info">Liste des blocks</p>
     
 <div class="row">
-<% body.forEach((item)=>{ %>
-<% if (item.index){ %>
+<% body.forEach((block)=>{ %>
+<% if (block.index){ %>
 	<% include components/block %>
 <% } %>
 <% }) %>

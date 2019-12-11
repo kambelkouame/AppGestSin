@@ -15,36 +15,27 @@ app.use(cookieParser())
 
 
 
-
-
-router.get('/connexionUser', function(req, res, next) {
-res.render('connexionUser', { title: 'Express'})
-});
-
-router.get('/connexionAgent', function(req, res, next) {
-res.render('connexionAgent', { title: 'Express'})
-});
-
-router.get('/deconnexion', function(req, res, next) {
-	//supprimer la variable cookie user
-	res.clearCookie("infoAgent")
-	//retourne la vue connexion
-	res.redirect("/connexionAgent")
-});
-
-
-router.get('/agent', function(req, res, next) {
+router.get('/agent/home', function(req, res, next) {
 
 //verification de l'existence de la variable cookie 'user'
-if(req.cookies.agent){
+if(req.cookies.infoAgent){
 	//si la variable existe retourner la vue dashboard
-res.render('agent/home', { title: 'Express'})
+
+	fetch('http://localhost:5001/chain')
+    .then(res => res.json())
+    .then(body => res.render('agent/home', { title: 'Express',blocks:body, data:req.cookies.infoAgent}));
+
 }else{
 	//sinon retourner connexion
 	res.redirect("/connexionAgent")
 }
 });
 
-
+router.get('/deconnexion', function(req, res, next) {
+  //supprimer la variable cookie user
+  res.clearCookie("infoAgent")
+  //retourne la vue connexion
+  res.redirect("/connexionAgent")
+});
 
 module.exports = router;

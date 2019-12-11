@@ -1,0 +1,27 @@
+<div class="row p-5">
+<div class="col-12 p-2 border border-light text-dark">
+    <div class="row">
+        <div class="col-8 d-flex align-items-center">
+            Liste des sinistres
+        </div>
+    </div>
+</div>
+
+<% sinistres.forEach(sinistre => { %>
+<div class="col-3 d-flex">
+    <div class="col-12 mt-3 p-3 bg-light">
+        <h6 class="font-weight-bold"><%= sinistre.type_sinistre %></h6>
+        <small>n° police : <%= sinistre.num_police %></small><br>
+        <small>date : <%= sinistre.date_declaration %></small><br>
+        <small>nb morts : <%= sinistre.nb_mort %></small><br>
+        <small>nb blesses : <%= sinistre.nb_blesse %></small><br>
+        <small>status : <%= sinistre.status %></small><br>
+        <% if(sinistre.status != "en cours"){ %>
+        <a href="../addSinistre/<%= sinistre.numero_police %>">details</i></a>
+        <% } %>
+
+    </div>
+</div>
+
+<% }) %>
+</div>

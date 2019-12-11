@@ -11,6 +11,7 @@ var cors = require("cors");
 var router = express.Router();
 var fetch =require('node-fetch');
 var cookieParser = require('cookie-parser')
+var blocks = require('../functions/blockChain')
 app.use(cookieParser())
 
 /* GET home page. */

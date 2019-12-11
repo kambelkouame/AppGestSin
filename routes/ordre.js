@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require("body-parser");
 var app = require("express")();
 var mysql = require('mysql');
-var db= require('../database/db');
 var fetch =require('node-fetch');
 let checkstatus = require('checkstatus');
 let parseJSON = require('parse-json');
@@ -14,36 +13,57 @@ var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
 
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'sinistre'
 
+})
 
+router.get('/home', function(req, res, next) {
 
-router.get('/connexionUser', function(req, res, next) {
-res.render('connexionUser', { title: 'Express'})
+if(req.cookies.infoAgent){
+  con.connect(()=>{
+    let temps = new Date()
+    let sql  = "select * from declaration_2 where niveau = ? and constat = ?"
+    con.query(sql,["ordre et expert","oui"],(err,result,fields)=>{
+      fetch('http://localhost:5001/chain')
+    .then(res => res.json())
+    .then(body => {
+res.render('ordre/sinistres/', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoAgent})
+})
+    })
+    })
+  //si la variable existe retourner la vue dashboard
+      
+}else{
+  //sinon retourner connexion
+  res.redirect("/connexionUser")
+}
 });
 
-router.get('/connexionAgent', function(req, res, next) {
-res.render('connexionAgent', { title: 'Express'})
+router.get('/sendConstat/:numpolice', function(req, res, next) {
+
+if(req.cookies.infoAgent){
+  
+res.render('ordre/form', { title: 'Express',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
+}
+  //si la variable existe retourner la vue dashboard
+	else{
+  //sinon retourner connexion
+  res.redirect("/connexionUser")
+}
+
 });
 
 router.get('/deconnexion', function(req, res, next) {
-	//supprimer la variable cookie user
-	res.clearCookie("infoAgent")
-	//retourne la vue connexion
-	res.redirect("/connexionAgent")
+  //supprimer la variable cookie user
+  res.clearCookie("infoAgent")
+  //retourne la vue connexion
+  res.redirect("/connexionAgent")
 });
 
-
-router.get('/ordre', function(req, res, next) {
-
-//verification de l'existence de la variable cookie 'user'
-if(req.cookies.agent){
-	//si la variable existe retourner la vue dashboard
-res.render('ordre/home', { title: 'Express'})
-}else{
-	//sinon retourner connexion
-	res.redirect("/connexionAgent")
-}
-});
 
 
 
