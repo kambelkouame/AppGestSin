@@ -17,15 +17,15 @@ a {
 }
 .nav-item:hover{
 	color: white !important;
-	background-color: green !important
+	background-color:  #e05915 !important
 }
 
 .navbar {
 	color: white !important;
-	background-color: green !important;
+	background-color: #e05915 !important;
 	height: 1.5cm;
 }
 
 .active{
-	background-color: green !important
+	background-color: #e05915 !important
 }

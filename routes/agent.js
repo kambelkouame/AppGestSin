@@ -14,22 +14,53 @@ var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
 
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'sinistre'
 
-router.get('/agent/home', function(req, res, next) {
+})
 
-//verification de l'existence de la variable cookie 'user'
+router.get('/home', function(req, res, next) {
+
 if(req.cookies.infoAgent){
-	//si la variable existe retourner la vue dashboard
-
-	fetch('http://localhost:5001/chain')
+  con.connect(()=>{
+    let temps = new Date()
+    let sql  = "select * from declaration_2 where niveau = ? and constat = ?"
+    con.query(sql,["ordre et expert","oui"],(err,result,fields)=>{
+      fetch('http://localhost:5001/chain')
     .then(res => res.json())
-    .then(body => res.render('agent/home', { title: 'Express',blocks:body, data:req.cookies.infoAgent}));
-
+    .then(body => {
+res.render('agent/sinistres/', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoAgent})
+})
+    })
+    })
+  //si la variable existe retourner la vue dashboard
+      
 }else{
-	//sinon retourner connexion
-	res.redirect("/connexionAgent")
+  //sinon retourner connexion
+  res.redirect("/connexionAgent")
 }
 });
+
+router.get('/sendResult/:numpolice', function(req, res, next) {
+
+if(req.cookies.infoAgent){
+  
+res.render('agent/form', { title: 'Express',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
+}
+  //si la variable existe retourner la vue dashboard
+  else{
+  //sinon retourner connexion
+  res.redirect("/connexionAgent")
+}
+
+});
+
+
+
+
 
 router.get('/deconnexion', function(req, res, next) {
   //supprimer la variable cookie user

@@ -52,10 +52,26 @@ res.render('ordre/form', { title: 'Express',numero_police:req.params.numpolice,i
   //si la variable existe retourner la vue dashboard
 	else{
   //sinon retourner connexion
-  res.redirect("/connexionUser")
+  res.redirect("/connexionAgent")
 }
 
 });
+
+
+
+
+router.post('/sendConstat/send',(req,res,next)=>{
+  console.log(req.body.constat)
+    con.connect(()=>{
+    let temps = new Date()
+    let sql  = "insert into avis_police(nom, prenoms, num_police, immatriculation, localisation, avis, date_envoi) values (?,?,?,?,?,?,?)"
+    con.query(sql,[req.body.nom,req.body.prenom,req.body.num_police,req.body.immatriculation,req.body.localisation,req.body.avis,temps],(err,result,fields)=>{
+      res.redirect("/ordre/home")
+    })
+    })
+    
+   
+})
 
 router.get('/deconnexion', function(req, res, next) {
   //supprimer la variable cookie user

@@ -215,11 +215,11 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
       	
 
         if(results[0].fonction== "gestionnaire"){
-          res.cookie("infoAgent", result[0])
-          res.redirect('/users/agent/home')
+          res.cookie("infoAgent", results[0])
+          res.redirect('/agent/home')
         } 
         else if (results[0].fonction=="policier"){
-
+          res.cookie("infoAgent", results[0])
          res.redirect('/ordre/home')
         }
          else if (results[0].fonction=="expert"){
