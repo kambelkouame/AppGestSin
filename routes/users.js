@@ -35,6 +35,15 @@ router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
    }
 })
 
+////////////////////////////////////////
+router.get('/home/form',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form1", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
 router.post('/home/addSinistre/send',(req,res,next)=>{
   console.log(req.body.constat)
     con.connect(()=>{
