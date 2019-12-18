@@ -1,0 +1,626 @@
+
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <title>SIIN</title>
+    <!-- Custom CSS -->
+       <link href="/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
+    <link href="/assets/libs/jquery-steps/steps.css" rel="stylesheet">
+    <link href="/dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/libs/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/libs/jquery-minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" type="text/css" href="/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/libs/quill/dist/quill.snow.css">
+    <link href="/dist/css/style.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+   
+</head>
+
+<body>
+   
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+
+<div class="container">
+
+  <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="card">
+                    <div class="card-body wizard-content">
+                        <h4 class="card-title">Questionnaire sinsitre</h4>
+                        <h6 class="card-subtitle"></h6>
+                        <form id="example-form" action="#" class="m-t-40">
+                            <div>
+                                <h3>Infos Sinistre</h3>
+                                <section>
+                                    <div class="row">
+                                         <div class="col-md-4 offset-md-8">
+                                            <label for="disabledTextInput">Numero de Police</label>
+                                                <div >
+                                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="AUTO-XXX-XXXX-XXXX" disabled>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                 <div class="row">
+                                     <div class="col-md-4 offset-md-8">
+                                        <label for="disabledTextInput">Votre Assurance</label>
+                                        <div >
+                                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Assurance" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                  <br><br><br>
+                                <h3>SINISTRES</h3>
+                                <br>
+                                  <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div>
+                                                <label>Lieu du sinistre</label>
+                                                <select class="select2 form-control custom-select">
+                                                    <option>Selectionner</option>
+                                                    <optgroup>
+                                                        <option value="SSA">Sinistre Sans Adversaire</option>
+                                                        <option value="SAA">Sinistre Avec Adversaire</option>
+                                                    </optgroup> 
+                                                </select>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                    <div class="col-6">
+
+                                         <div class="form-group">
+                                            <div>
+                                                <label>Dommage Apparent</label>
+                                                <select class="select2 form-control custom-select">
+                                                    <option>Selectionner</option>
+                                                    <optgroup>
+                                                        <option value="DC">Vitre brisé</option>
+                                                        <option value="DM">Parre Brise cassé</option>
+                                                        <option value="DM/DC">DOMMAGE MATERIEL ET CORPOREL</option>
+                                                    </optgroup> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                  </div>
+
+                                  <div class="row">
+
+                                    <div class="col-6">
+
+                                <div class="form-group">
+                                    <label>L'accident s'est produit au cours des activités professionnelles ?</label>
+                                    <div >
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" >
+                                            <label class="custom-control-label" for="customControlValidation1">OUI</label>
+                                        </div>
+                                         <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked">
+                                            <label class="custom-control-label" for="customControlValidation2">NON</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked">
+                                            <label class="custom-control-label" for="customControlValidation2">NEANT</label>
+                                        </div>
+                                         
+                                    </div>
+                                </div>
+                                 </div>
+
+
+                                  </div>
+                  
+
+                              <br><br>
+                             <h4> Information sur le temoins</h4>              
+                             <br>
+
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                         <label >Nom et Prenom du temoin</label>
+                                    <div class="input-group">
+                                     <input name="Lieu" type="text" class="form-control">
+                                    </div>
+                                      
+                                         </div>
+                                    </div>
+                                   
+                                <div class="col-sm">
+
+                                    <div class="form-group">
+                                         
+                                        <label>Adresse du temoin  </label>
+                                             <div>
+                                                <div class="form-group">
+                                                     <input name="Lieu" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                         </div>
+                                </div>
+                                <div class="col-sm">
+                                  <div class="form-group">  
+                                        <label>contact du temoin </label>
+                                                    <div>
+                                                <div class="form-group">
+                                                      <input type="text" class="form-control phone-inputmask" id="phone-mask" placeholder="Entrer le contact ">
+                                                </div>
+                                            </div>
+                                         </div>
+                                </div>
+                             </div>
+
+                             <div class="row">
+                                  <div class="col-sm">
+                                    <label>Importer les photos du sinistre </label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="validatedCustomFile">
+                                                <label class="custom-file-label" for="validatedCustomFile"></label>
+                                                <div class="invalid-feedback">max:4 MB</div>
+                                            </div>
+
+                                  </div>
+                                        
+                                </div>
+
+                                 <div class="form-group row">
+                                            <label  for="disabledTextInput">Disabled input</label>
+                                            <div >
+                                                <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input" disabled>
+                                            </div>
+                                         
+
+                                </div>
+                                <br> <p>(*) Champs Obligatoires</p>
+                                </section>
+
+
+
+
+
+                                <h3>Infos Assurés</h3>
+                                <section>
+
+                                    
+                <div class="row">
+                     <div class="col-md-4 offset-md-8">
+                        <label for="disabledTextInput">Numero de Police</label>
+                        <div >
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="AUTO-XXX-XXXX-XXXX" disabled>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                     <div class="col-md-4 offset-md-8">
+                        <label for="disabledTextInput">Votre Assurance</label>
+                        <div >
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Assurance" disabled>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br>
+
+              <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <div>
+                            <label>Nom de famille de l'assuré</label>
+                             <div class="input-group">
+                                     <input name="nom" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                  
+                </div>
+                <div class="col-6">
+
+                     <div class="form-group">
+                        <div>
+                            <label>Prenom</label>
+                              <div class="input-group">
+                                     <input name="prenom" type="text" class="form-control">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+               
+              </div>
+           
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                         <label >Numero de telephone Usuel</label>
+                         <div class="input-group">
+                              <input name="numero" type="number" class="form-control">
+                          </div>
+                      
+                         </div>
+                    </div>
+                    
+                  
+                
+                <div class="col-sm">
+
+                    <div class="form-group">
+                         
+                        <label>Email Usuel  </label>
+                                    <div>
+                                  <div class="input-group">
+                                     <input name="email" type="email" class="form-control">
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+                <div class="col-sm">
+                  <div class="form-group">  
+                        <label>Domicile </label>
+                                    <div>
+                                <div class="input-group">
+                                     <input name="domicile" type="text" class="form-control">
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+             </div>
+
+             <h4>Information sur le vehicule</h4>
+
+              <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                 
+                                <label>Marque du vehicule</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="vehicule" type="text" class="form-control">
+                                            </div>
+                                 </div>
+                            </div>
+                        </div>
+                            
+                          
+                        
+                    <div class="col-sm">
+
+                            <div class="form-group">
+                                 
+                                <label>Genre du vehicule</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="Lieu" type="text" class="form-control">
+                                            </div>
+                                 </div>
+                        </div>
+                    </div>
+                        <div class="col-sm">
+
+                              <label>Categorie du permis</label>
+                            <div>
+                                 <div class="input-group">
+                                             <input name="Categorie permis" type="text" class="form-control">
+                                            </div>
+                             </div>
+                         
+                        </div>
+                     </div>
+         
+
+                     <div class="row">
+                          <div class="col-sm">
+                            <label>Lieu d'obtention du permis</label>
+                                    <div class="input-group">
+                                      <input name="autiecole" type="text" class="form-control">
+                                      </div>
+                          </div>
+
+                            <div class="col-sm">
+                            <label>Date de Péremption du permis</label>
+                            <div class="input-group">
+                              <input name="autiecole" type="text" class="form-control">
+                              </div>
+                          </div>
+                                
+                    </div>
+
+
+
+                                    
+                                  <p>(*) Champs Obligatoires</p>
+                                </section>
+
+
+                                <h3>Infos sur Contrats</h3>
+                                <section>
+                                    <div class="row">
+                     <div class="col-md-4 offset-md-8">
+                        <label for="disabledTextInput">Numero de Police</label>
+                        <div >
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="AUTO-XXX-XXXX-XXXX" disabled>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                     <div class="col-md-4 offset-md-8">
+                        <label for="disabledTextInput">Votre Assurance</label>
+                        <div >
+                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Assurance" disabled>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br>
+
+              <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <div>
+                            <label>date de Debut su contrat</label>
+                             <div class="input-group">
+                                     <input name="nom" type="text" class="form-control" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    
+                  
+                </div>
+                <div class="col-6">
+
+                     <div class="form-group">
+                        <div>
+                            <label>Date Fin du contrat</label>
+                              <div class="input-group">
+                                     <input name="prenom" type="text" class="form-control" disabled>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+               
+              </div>
+           
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                         <label >Souscripteur</label>
+                         <div class="input-group">
+                              <input name="numero" type="number" class="form-control" disabled>
+                          </div>
+                      
+                         </div>
+                    </div>
+                    
+                  
+                
+                <div class="col-sm">
+
+                    <div class="form-group">
+                         
+                        <label>Type de Garantie </label>
+                                    <div>
+                                  <div class="input-group">
+                                     <input name="email" type="email" class="form-control" disabled>
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+                <div class="col-sm">
+                  <div class="form-group">  
+                        <label>Immatricumation</label>
+                                    <div>
+                                <div class="input-group">
+                                     <input name="domicile" type="text" class="form-control" disabled>
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+             </div>
+
+             <h4>Information sur le vehicule</h4>
+
+              <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                 
+                                <label>Model du vehicule</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="vehicule" type="text" class="form-control" disabled>
+                                            </div>
+                                 </div>
+                            </div>
+                        </div>
+                            
+                          
+                        
+                    <div class="col-sm">
+
+                            <div class="form-group">
+                                 
+                                <label>Ville</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="Lieu" type="text" class="form-control" disabled>
+                                            </div>
+                                 </div>
+                        </div>
+                    </div>
+                        <div class="col-sm">
+
+                              <label>energie</label>
+                            <div>
+                                 <div class="input-group">
+                                             <input name="Categorie permis" type="text" class="form-control" disabled>
+                                            </div>
+                             </div>
+                         
+                        </div>
+                     </div>
+         
+
+                                </section>
+                                <h3>Finir</h3>
+                                <section>
+                                    <input id="acceptTerms" name="acceptTerms" type="checkbox" >
+                                    <label for="acceptTerms">j'acceptes les conditions d'utilisations de la </label>
+                                </section>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+</div>
+
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/dist/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script>
+
+     
+    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Menu sidebar -->
+    <script src="/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/dist/js/custom.min.js"></script>
+    <!-- This Page JS -->
+    <script src="/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="/dist/js/pages/mask/mask.init.js"></script>
+    <script src="/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+    <script src="/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+    <script src="/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+    <script src="/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script src="/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/libs/quill/dist/quill.min.js"></script>
+
+
+
+
+
+    <script>
+        //***********************************//
+        // For select 2
+        //***********************************//
+        $(".select2").select2();
+
+        /*colorpicker*/
+        $('.demo').each(function() {
+        //
+        // Dear reader, it's actually very easy to initialize MiniColors. For example:
+        //
+        //  $(selector).minicolors();
+        //
+        // The way I've done it below is just for the demo, so don't get confused
+        // by it. Also, data- attributes aren't supported at this time...they're
+        // only used for this demo.
+        //
+        $(this).minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                position: $(this).attr('data-position') || 'bottom left',
+
+                change: function(value, opacity) {
+                    if (!value) return;
+                    if (opacity) value += ', ' + opacity;
+                    if (typeof console === 'object') {
+                        console.log(value);
+                    }
+                },
+                theme: 'bootstrap'
+            });
+
+        });
+        /*datwpicker*/
+        jQuery('.mydatepicker').datepicker();
+        jQuery('#datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+    </script>
+
+    <script>
+        // Basic Example with form
+    var form = $("#example-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+     form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function(event, currentIndex, newIndex) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function(event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function(event, currentIndex) {
+            alert("Submitted!");
+        }
+    });
+
+
+    </script>
+
+<% include ../../../anim %>
+
+
+</body>
+
+</html>

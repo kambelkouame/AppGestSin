@@ -15,8 +15,11 @@ var blocks = require('../functions/blockChain')
 var db= require('../database/db');
 var app = require('express')()
 
+
 app.use(body.json()); // for parsing application/json
 app.use(body.urlencoded({ extended: true }));
+
+
 
 const con = mysql.createConnection({
     host: 'localhost',
@@ -29,33 +32,142 @@ const con = mysql.createConnection({
 
 router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
-////////////////////////////////////////
-router.get('/home/form',(req,res,next)=>{
+/////////////////////////////chemin pour formulaire sans adversaire/////////////////////////////////////
+
+router.get('/home/sinistres/Dommage_corporels',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form1", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/sansadversaire/formDommage", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
+
+router.get('/home/sinistres/vol',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/sansadversaire/formVol", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
+router.get('/home/sinistres/Bris_de_Glace',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/sansadversaire/formBrisG", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
+router.get('/home/sinistres/Incendie',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/sansadversaire/formIncendie", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
+///////////////////////chemin//////////////////////////////////
+
+router.get('/home/sinistres/Dommage_corporels_avec_adversaire',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/adversaire/formDomAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
+router.get('/home/sinistres/vol_avec_adversaire',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/adversaire/formVolAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
+router.get('/home/sinistres/Bris_de_Glace_avec_adversaire',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/adversaire/formBrisGAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
+router.get('/home/sinistres/Incendie_avec_adversaire',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/adversaire/formIncendie", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+///////////////////////////fin chmin avec adversaire/////////////////////////////////////////
 
 router.post('/home/addSinistre/send',(req,res,next)=>{
   console.log(req.body.constat)
     con.connect(()=>{
     let temps = new Date()
-    let sql  = "insert into declaration_2(nom, prenoms, num_police, date_declaration, type_sinistre, nb_mort, nb_blesse, constat,niveau, status) values (?,?,?,?,?,?,?,?,?,?)"
-    con.query(sql,[req.body.nom,req.body.prenom,req.body.num_police,temps,req.body.typesinistre,req.body.nbmorts,req.body.nbblesses,req.body.constat,"ordre et expert","en cours"],(err,result,fields)=>{
-      res.redirect("/users/home/sinistres")
+    let sql  = "insert into sinistre(nom, prenom, num_police, type_sinistre, cat_sinistre, date_sinistre, permis, ,carte_grise, visite_tech, element_prod, attestation, sinistre) values (?,?,?,?,?,?,?,?,?,?,?,?)"
+    con.query(sql,[req.body.nom,req.body.prenom,req.body.num_police,temps,req.body.type_sinistre,req.body.cat_sinistre,req.body.permis,req.body.cate_grise,req.body.viste_tech,req.body.element_prod,req.body.attestation, req.body.sinistre],(err,result,fields)=>{
+
+    if( req.body.type_sinistre =="SAA"){
+          if( req.body.cat_sinistre =="DC"){
+             res.redirect("/users/home/sinistres/Dommage_corporels_avec_adversaire")
+          }else if(req.body.cat_sinistre=="DM" || req.body.cat_sinistre=="DM/DC"){
+            if ( req.body.sinistre=="VOL"){
+               res.redirect("/users/home/sinistres/vol_avec_adversaire")
+            }else if (req.body.sinistre=="BDG"){
+              res.redirect("/users/home/sinistres/Bris_de_Glace_avec_adversaire")
+
+            }else if (req.body.sinistre=="I"){
+              res.redirect("/users/home/sinistres/Incendie_avec_adversaire")
+
+            }else if (req.body.sinistre=="I"){
+              res.redirect("/users/home/sinistres/Incendie_avec_adversaire")
+
+            }else if (req.body.sinistre=="D"){
+              res.redirect("/users/home/sinistres/Dommage_avec_adversaire")
+            }
+          }
+    }else if(req.body.type_sinistre == "SSA"){
+
+       if( req.body.cat_sinistre =="DC"){
+             res.redirect("/users/home/sinistres/Dommage_corporels")
+          }else if(req.body.cat_sinistre=="DM"|| req.body.cat_sinistre=="DM/DC"){
+            if ( req.body.sinistre=="VOL"){
+               res.redirect("/users/home/sinistres/vol")
+            }else if (req.body.sinistre=="BDG"){
+              res.redirect("/users/home/sinistres/Bris_de_Glace")
+
+            }else if (req.body.sinistre=="I"){
+              res.redirect("/users/home/sinistres/Incendie")
+
+            }else if (req.body.sinistre=="I"){
+              res.redirect("/users/home/sinistres/Incendie")
+
+            }else if (req.body.sinistre=="D"){
+              res.redirect("/users/home/sinistres/Dommage")
+            }
+          }
+
+
+
+    }else{
+     res.redirect("/home/addSinistre/:numero_police")
+
+    }
+
     })
-    })
+  })
+
+  });
+
     
    
-})
 
 //User directory
 router.get('/home/sinistres', function(req, res, next) {

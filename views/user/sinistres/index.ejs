@@ -71,6 +71,8 @@
   <div class="row">
    <% include menu %>
    <div class="col-10">
+
+
    <% include sinistres %>
     </div>
   </div>
@@ -89,9 +91,12 @@
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#listBlocks">
       <div class="card-body" id="lesBlocks">
         <div class="row">
+          
        <% blocks.forEach((block)=>{ %>
        <% include ../../components/block %>
-     <% }) %>
+     <% }) %>  
+    <div class="spinner-grow text-danger"></div>
+    <div class="spinner-grow text-warning"></div>
    </div>
       </div>
     </div>
