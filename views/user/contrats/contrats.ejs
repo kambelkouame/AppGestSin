@@ -1,47 +1,73 @@
 <div class="row p-5">
-<div class="col-12 p-2 border border-light text-dark">
-    <div class="row">
-        <div class="col-8 d-flex align-items-center">
-            Liste des contrats valides
-        </div>
-        <div class="col-4">
-            [ page <%= contrats.current_page %> / <%= contrats.last_page %> ]
-            <div class="btn-group ml-2" role="group" aria-label="Basic example">
-                <% if(contrats.prev_page_url==null){ %>
-                <button type="button" disabled class="btn btn-secondary">precedent</button>
-                <% }else{ %>
-                <button type="button" class="btn btn-secondary"
-                    onclick="window.location='<%= contrats.current_page -1 %>'">precedent</button>
-                <% } %>
-                <% if(contrats.next_page_url==null){ %>
-                    <button type="button" class="btn btn-secondary"
-                   disabled >suivant</button>
-                <% }else{ %>
-                    <button type="button" class="btn btn-secondary"
-                    onclick="window.location='<%= contrats.current_page +1 %>'">suivant</button>
-                <% } %>
-               
-               
+        <div class="col-12 p-2 border border-light text-dark">
+            <div class="row">
+                <div class="col-8 d-flex align-items-center">
+                    Liste des contrats valides
+                </div>
+                <div class="col-4">
+                    [ page <%= contrats.current_page %> / <%= contrats.last_page %> ]
+                    <div class="btn-group ml-2" role="group" aria-label="Basic example">
+                        <% if(contrats.prev_page_url==null){ %>
+                        <button type="button" disabled class="btn btn-secondary">precedent</button>
+                        <% }else{ %>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="window.location='<%= contrats.current_page -1 %>'">precedent</button>
+                        <% } %>
+                        <% if(contrats.next_page_url==null){ %>
+                            <button type="button" class="btn btn-secondary"
+                           disabled >suivant</button>
+                        <% }else{ %>
+                            <button type="button" class="btn btn-secondary"
+                            onclick="window.location='<%= contrats.current_page +1 %>'">suivant</button>
+                        <% } %>
+                       
+                       
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<% contrats.data.forEach(contrat => { 
-if(contrat.etat==1){    
-%>
-
-<div class="col-3 d-flex">
-    <div class="col-12 mt-3 p-3 bg-light">
-        <h6 class="font-weight-bold"><%= contrat.libelle %></h6>
-        <small>n° police : <%= contrat.numero_police %></small><br>
-        <small>date d'effet : <%= contrat.date_effet %></small><br>
-        <small>date de fin : <%= contrat.date_fin %></small><br>
-        <a href="../addSinistre/<%= contrat.numero_police %>">declarer un sinistre</i></a>
        
+        <% contrats.data.forEach(contrat => { 
+        if(contrat.etat==1){    
+        %>
 
+        <div class="col-3 d-flex">
+
+         <div class="card card-chart">
+              <div class="card-header">
+                <h4 class="card-title"><%= contrat.libelle %></h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                    <i class="now-ui-icons loader_gear"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Details</a>
+                    <a class="dropdown-item" href="#">Gestionnaire</a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <small>n° police : <%= contrat.numero_police %></small><br>
+                <small>date d'effet : <%= contrat.date_effet %></small><br>
+                <small>date de fin : <%= contrat.date_fin %></small><br>
+               
+              </div>
+              <div class="card-footer">
+                <a href="../addSinistre/<%= contrat.numero_police %>">Reclamation</i></a>
+              </div>
+            </div>
+            
+
+
+        </div>
+
+       <% }}) %>
     </div>
-</div>
 
-<% }}) %>
-</div>
+
+
+
+   
+           
+         

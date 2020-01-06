@@ -74,7 +74,7 @@ router.get('/home/sinistres/Incendie',(req,res,next)=>{
 
 ///////////////////////chemin//////////////////////////////////
 
-router.get('/home/sinistres/Dommage_corporels_avec_adversaire',(req,res,next)=>{
+router.get('/home/sinistres/Dommage_avec_adversaire',(req,res,next)=>{
   if(req.cookies.infoUser){
     res.render("user/form/adversaire/formDomAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
@@ -100,7 +100,7 @@ router.get('/home/sinistres/Bris_de_Glace_avec_adversaire',(req,res,next)=>{
 
 router.get('/home/sinistres/Incendie_avec_adversaire',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/adversaire/formIncendie", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/adversaire/formIncendieAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
@@ -109,47 +109,83 @@ router.get('/home/sinistres/Incendie_avec_adversaire',(req,res,next)=>{
 
 router.post('/home/addSinistre/send',(req,res,next)=>{
   console.log(req.body.constat)
-    con.connect(()=>{
-    let temps = new Date()
-    let sql  = "insert into sinistre(nom, prenom, num_police, type_sinistre, cat_sinistre, date_sinistre, permis, ,carte_grise, visite_tech, element_prod, attestation, sinistre) values (?,?,?,?,?,?,?,?,?,?,?,?)"
-    con.query(sql,[req.body.nom,req.body.prenom,req.body.num_police,temps,req.body.type_sinistre,req.body.cat_sinistre,req.body.permis,req.body.cate_grise,req.body.viste_tech,req.body.element_prod,req.body.attestation, req.body.sinistre],(err,result,fields)=>{
+    
 
-    if( req.body.type_sinistre =="SAA"){
-          if( req.body.cat_sinistre =="DC"){
+    let sql  = "INSERT INTO sinistre SET ?";
+    const nom=req.body.nom;
+    const prenom=req.body.prenom;
+    const num_police=req.body.num_police;
+    const type_sinistre=req.body.type_sinistre;
+    const cat_sinistre=req.body.cat_sinistre;
+    const date_sinistre=req.body.date_sinistre;
+    const permis=req.body.permis;
+    const carte_grise=req.body.carte_grise;
+    const visite_tech=req.body.visite_tech;
+    const element_prod=req.body.element_prod;
+    const attestation=req.body.attestation;
+    const sinistre=req.body.sinistre;
+   
+    let declaration={
+
+        nom:nom,
+        prenom:prenom,
+        num_police:num_police,
+        type_sinistre:type_sinistre,
+        cat_sinistre:cat_sinistre,
+        date_sinistre:date_sinistre,
+        permis:permis,
+        carte_grise:carte_grise,
+        visite_tech:visite_tech,
+        element_prod:element_prod,
+        attestation:attestation,
+        sinistre:sinistre,
+
+    }
+  console.log(declaration)
+
+  let connexion = mysql.createConnection({
+      host : db.hostname,
+      user : db.username,
+      password : db.password,
+      database : db.dbname,
+      port : db.port,
+    })
+
+  connexion.query(sql,declaration) ,( err,result)=>{
+      if(err){
+        console.log(err.message)
+      }
+    }
+    if ( type_sinistre =="SAA"){
+          if( cat_sinistre =="DC"){
              res.redirect("/users/home/sinistres/Dommage_corporels_avec_adversaire")
-          }else if(req.body.cat_sinistre=="DM" || req.body.cat_sinistre=="DM/DC"){
-            if ( req.body.sinistre=="VOL"){
+          }else if(cat_sinistre=="DM" || cat_sinistre=="DM/DC"){
+            if ( sinistre=="VOL"){
                res.redirect("/users/home/sinistres/vol_avec_adversaire")
-            }else if (req.body.sinistre=="BDG"){
+            }else if (sinistre=="BDG"){
               res.redirect("/users/home/sinistres/Bris_de_Glace_avec_adversaire")
 
-            }else if (req.body.sinistre=="I"){
-              res.redirect("/users/home/sinistres/Incendie_avec_adversaire")
-
-            }else if (req.body.sinistre=="I"){
+            }else if (sinistre=="I"){
               res.redirect("/users/home/sinistres/Incendie_avec_adversaire")
 
             }else if (req.body.sinistre=="D"){
               res.redirect("/users/home/sinistres/Dommage_avec_adversaire")
             }
           }
-    }else if(req.body.type_sinistre == "SSA"){
+    }else if(type_sinistre == "SSA"){
 
-       if( req.body.cat_sinistre =="DC"){
+       if( cat_sinistre =="DC"){
              res.redirect("/users/home/sinistres/Dommage_corporels")
-          }else if(req.body.cat_sinistre=="DM"|| req.body.cat_sinistre=="DM/DC"){
-            if ( req.body.sinistre=="VOL"){
-               res.redirect("/users/home/sinistres/vol")
-            }else if (req.body.sinistre=="BDG"){
+          }else if(cat_sinistre=="DM"|| cat_sinistre=="DM/DC"){
+            if ( sinistre=="VOL"){
+               res.redirect("/users/home/sinistres/vol/")
+            }else if (sinistre=="BDG"){
               res.redirect("/users/home/sinistres/Bris_de_Glace")
 
-            }else if (req.body.sinistre=="I"){
+            }else if (sinistre=="I"){
               res.redirect("/users/home/sinistres/Incendie")
 
-            }else if (req.body.sinistre=="I"){
-              res.redirect("/users/home/sinistres/Incendie")
-
-            }else if (req.body.sinistre=="D"){
+            }else if (sinistre=="D"){
               res.redirect("/users/home/sinistres/Dommage")
             }
           }
@@ -157,15 +193,168 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
 
 
     }else{
-     res.redirect("/home/addSinistre/:numero_police")
+     res.redirect("/users/home/addSinistre/:numero_police")
 
-    }
-
-    })
-  })
-
+    
+  }
   });
 
+///////////////////////////////////formulaire vole//////////////
+router.post('/home/sinistres/vol/env',(req,res,next)=>{
+  console.log(req.body.constat)
+    
+
+    let sql  = "INSERT INTO sinistrevoldetails SET ?";
+    
+    const numero_police=req.body.numero_police;
+    const Localisation=req.body.Localisation;
+    const type_vol=req.body.type_vol;
+    const nom_temoin=req.body.nom_temoin;
+    const telephone_temoin=req.body.telephone_temoin;
+    const adresse_temoin=req.body.adresse_temoin;
+    const photo_vol=req.body.photo_vol;
+    const nom=req.body.nom;
+    const prenom=req.body.prenom;
+    const numero=req.body.numero;
+    const email=req.body.email;
+    const domicile=req.body.domicile;      
+    const marque_vehicule=req.body.marque_vehicule;
+    const genre_vehicule=req.body.genre_vehicule;
+    const categorie_permis=req.body.categorie_permis;
+    const Model_vehicule=req.body.Model_vehicule;
+    const ville=req.body.ville;
+    const energie=req.body.energie;
+    const immatriculation=req.body.immatriculation;
+    const date_debut_cont=req.body.date_debut_cont;
+    const date_fin_cont=req.body.date_fin_cont;
+    const souscripteur=req.body.souscripteur;
+    const type_Garantie=req.body.type_Garantie;
+    const Assurance=req.body.Assurance;
+   
+    let sinistrevoldetails={
+
+        numero_police:numero_police,
+        Localisation:Localisation,
+        type_vol:type_vol,
+        nom_temoin:nom_temoin,
+        adresse_temoin:adresse_temoin,
+        telephone_temoin:telephone_temoin,
+        photo_vol:photo_vol,
+        nom:nom,
+        prenom:prenom,
+        numero:numero,
+        email:email,
+        domicile:domicile,
+        marque_vehicule:marque_vehicule,
+        genre_vehicule:genre_vehicule,
+        categorie_permis:categorie_permis,
+        Model_vehicule:Model_vehicule,
+        ville:ville,
+        energie:energie,
+        immatriculation:immatriculation,
+        date_debut_cont:date_debut_cont,
+        date_fin_cont:date_fin_cont,
+        souscripteur:souscripteur,
+        type_Garantie:type_Garantie,
+        Assurance:Assurance,
+
+    }
+  console.log(sinistrevoldetails)
+
+  let connexion = mysql.createConnection({
+      host : db.hostname,
+      user : db.username,
+      password : db.password,
+      database : db.dbname,
+      port : db.port,
+    })
+
+  connexion.query(sql,sinistrevoldetails) ,( err,result)=>{
+      if(err){
+        console.log(err.message)
+      }
+    }
+
+     res.redirect("/users/home/contrats/1")
+    
+  });
+
+
+
+/*
+///////////////////////////////////formulaire INCENDIE//////////////
+router.post('/home/sinistres/Incendie/send',(req,res,next)=>{
+  console.log(req.body.constat)
+    
+
+    let sql  = "INSERT INTO sinistredetails SET ?";
+    
+    const num_police=req.body.num_police;
+    const Localisation=req.body.Localisation;
+    const Vol_accessoire=req.body.vol_accessoire;
+    const vol_complet=req.body.vol_complet;
+    const nom_temoin=req.body.nom_temoin;
+    const telephone_temoin=req.body.telephone_temoin;
+    const contact_temoin=req.body.contact_temoin;
+    const photo_vol=req.body.photo_vol;
+    const marque_vehicule=req.body.marque_vehicule;
+    const genre_vehicule=req.body.genre_vehicule;
+    const categorie_permis=req.body.categorie_permis;
+    const Model_vehicule=req.body.Model_vehicule;
+    const ville=req.body.ville;
+    const energie=req.body.energie;
+    const immatriculation=req.body.immatriculation;
+    const date_debut_cont=req.body.date_debut_cont;
+    const date_fin_cont=req.body.date_fin_cont;
+    const souscripteur=req.body.souscripteur;
+    const type_de_garantie=req.body.type_de_garantie;
+    const Assurance=req.body.Assurance;
+   
+    let declarationdetails={
+
+        num_police:num_police,
+        Localisation:Localisation,
+        Vol_accessoire:vol_accessoire,
+        vol_complet:vol_complet,
+        nom_temoin:nom_temoin,
+        telephone_temoin:telephone_temoin,
+        contact_temoin:contact_temoin,
+        photo_vol:photo_vol,
+        marque_vehicule:marque_vehicule,
+        genre_vehicule:genre_vehicule,
+        categorie_permis:categorie_permis,
+        Model_vehicule:Model_vehicule,
+        ville:ville,
+        energie:energie,
+        immatriculation:immatriculation,
+        date_debut_cont:date_debut_cont,
+        date_fin_cont:date_fin_cont,
+        souscripteur:souscripteur,
+        type_de_garantie:type_de_garantie,
+        Assurance:Assurance,
+
+    }
+  console.log(declarationdetails)
+
+  let connexion = mysql.createConnection({
+      host : db.hostname,
+      user : db.username,
+      password : db.password,
+      database : db.dbname,
+      port : db.port,
+    })
+
+  connexion.query(sql,declarationdetails) ,( err,result)=>{
+      if(err){
+        console.log(err.message)
+      }
+    }
+
+     res.redirect("/home/contrats/1")
+    
+  });
+
+*/
     
    
 

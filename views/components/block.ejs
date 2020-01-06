@@ -1,11 +1,36 @@
-<div class="col-3 d-flex mt-3">
-    <div class="card shadow-sm border-0 rounded-0" style="">
-  <div class="card-body p-4">
-    <small class="text-secondary">Index : <%= block.index %></small></br>
-    <small class="text-secondary">Proof : <%= block.proof %></small></br>
-    <small class="text-secondary">timestamp : <%= block.timestamp %></small></br>
-    <small class="text-secondary">PreviousBlockHash : <%= block.previousBlockHash %></small>
-    <br>
-  </div>
-</div>
-</div>
+
+
+
+
+<div class="col-sm-4">
+   
+
+         <div class="card card-chart ">
+	              <div class="card-header">
+		                <div class="dropdown">
+		                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+		                    <i class="now-ui-icons loader_gear"></i>
+		                  </button>
+			                  <div class="dropdown-menu dropdown-menu-right">
+			                    <a class="dropdown-item" href="#">Details</a>
+			                   
+			                    
+			                  </div>
+		                </div>
+	              </div>
+		              <div class="card-body">
+		               				
+		               	<small class="text-secondary">Index : <%= block.index %></small></br>
+					    <small class="text-secondary">Proof : <%= block.proof %></small></br>
+					    <small class="text-secondary">timestamp : <%= block.timestamp %></small></br>
+					    <small class="text-secondary">PreviousBlockHash : <%= block.previousBlockHash %></small>
+		               
+		               
+		             </div>
+              
+            
+        </div>
+
+    </div>
+
+
