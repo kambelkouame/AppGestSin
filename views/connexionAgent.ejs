@@ -1,34 +1,101 @@
+
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <head>
+  
+<link href="/css/login-user.css" rel="stylesheet" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<link href="/assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/assets/demo/demo.css" rel="stylesheet" />
+<!------ Include the above in your HEAD tag ---------->
+<head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
- <div>
-    <h1>GESTIONNAIRES</h1>
- <a class="nav-link"  href="/connexionUser"> <button type="button" class="btn btn-sm btn-outline-secondary">Connexion Assurés</button></a>
-    <p class="text-info">Espace de connexion</p>
-<div>
-<div class="row d-flex justify-content-center" id="page">
-<div class="form col-4 p-5 shadow-sm">
-  <form method="post" action="/users/loginAgent">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control-plaintext border rounded-0 p-2" name="email" aria-describedby="emailHelp">
-    <small  class="form-text text-muted">Entrer votre adresse mail</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control-plaintext border rounded-0 p-2" >
-  </div>
-  
-  <button type="submit" class="btn btn-danger rounded-0">Connexion</button>
-</form>
-</div>
-</div>
-  </body>
-   <% include anim %>
-</html>
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Blockchain Application<br> Login Page</h2>
+            <p>Veillez vous authentifier avant d'avoir access à votre compte</p>
+
+            <div class="button-container">
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-twitter"></i>
+                </button>
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-google-plus-g"></i>
+                </button>
+              </div>
+         </div>
+
+         
+
+      </div>
+      <div class="main">
+        
+        
+
+         <div class="col-sm-12 ">
+          
+            <div class="login-form">
+              <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <div class="card card-upgrade">
+
+               <form method="post" action="/users/loginAgent">
+                <div class="text-center">
+                   <h4> Login page</h4>
+
+                </div>
+                  
+                <div class="col-sm">
+                    <div class="form-group ">
+                       <label>email</label>
+                       <input type="email" name="email" class="form-control" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                       <label>Password</label>
+                       <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-round btn-primary">Login</button>
+                    <button  class="btn btn-round btn-default">mot de passe oublié?</button>
+                </div>
+               </form>
+             </div>
+           </div>
+         </div>
+             </div>
+            </div>
+         
+       
+      </div>
+<% include anim %>
+
+   <script src="/assets/js/core/jquery.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chart JS -->
+  <script src="/assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="/assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="/assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+  <script src="/assets/demo/demo.js"></script>
+
+    </body>
+    </html>
