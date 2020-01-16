@@ -32,10 +32,48 @@ const con = mysql.createConnection({
 
 router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+ 
+      fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192)')
+        .then(result => result.json())
+       // .then(json => console.log(json));
+        .then(body =>{
+        //  console.log(body)
+          //let resultat =[]
+            let contrat 
+            //  resutlat[0]
+          body.data.forEach(b=>{
+            if(b.numero_police==req.params.numero_police) contrat=b //resultat.push(b)
+          })
+           
+ console.log(contrat.avenant_id)
+                  
+           let  Lien1 = 'https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/details_contrat/';
+           let ID =contrat.avenant_id
+           var url = Lien1 + ID
+           fetch(url)
+            .then(res => res.json())
+            .then(detail=>{
+            let  contain
+             console.log(detail)
+            
+               detail.garanties.forEach(d => {
+            
+                for (var i = 1; i < d.id.length; i++) {
+                  d.libelle[i]
+                  console.log(d.libelle[i])
+               } contain=d})
+               console.log(contain)
+          res.render('user/formPrereq', { title: 'SIIN', contrats:contrat ,details:contain, infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+          })
+      
+       })
+
+
+   // res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
+
 })
 
 /////////////////////////////chemin pour formulaire sans adversaire/////////////////////////////////////
@@ -156,6 +194,11 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
         console.log(err.message)
       }
     }
+   
+
+
+  
+
     if ( type_sinistre =="SAA"){
           if( cat_sinistre =="DC"){
              res.redirect("/users/home/sinistres/Dommage_corporels_avec_adversaire")
@@ -405,7 +448,7 @@ if(req.cookies.infoUser){
           contratValide.data.push(cont)
         }
       })
-      res.render('user/contrats/', { title: 'Express',blocks:body, contrats:contratValide, data:req.cookies.infoUser})
+      res.render('user/contrats/', { title: 'SIIN',blocks:body, contrats:contratValide, data:req.cookies.infoUser})
     })
      });
 
@@ -524,9 +567,9 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
       	//creation de la variable cookie
       	
 
-        if(results[0].fonction== "gestionnaire"){
+        if(results[0].fonction == "gestionnaire"){
           res.cookie("infoAgent", results[0])
-          res.redirect('/agent/home')
+          res.render('agent/sinistres/index', { title: 'Express',blocks:body,data:req.cookies.infoAgent})
         } 
         else if (results[0].fonction=="policier"){
           res.cookie("infoAgent", results[0])

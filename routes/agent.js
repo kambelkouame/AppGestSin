@@ -32,7 +32,8 @@ if(req.cookies.infoAgent){
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
-res.render('agent/sinistres/', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoAgent})
+
+res.render('agent/sinistres/index', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoAgent})
 })
     })
     })
