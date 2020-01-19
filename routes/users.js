@@ -53,13 +53,8 @@ router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
            fetch(url)
             .then(res => res.json())
             .then(detail=>{
-            let  contain
+           /* let  contain
              console.log(detail)
-
-             /*
-                detail.garanties.forEach((contain)=>{ 
-                                        
-                              if (contain.libelle){
             
                detail.garanties.forEach(d => {
             
@@ -69,7 +64,7 @@ router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
                } contain=d})
                console.log(contain)*/
           res.render('user/formPrereq', { title: 'SIIN', contrats:contrat ,details:detail, infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
-       })
+          })
       
        })
 
@@ -79,14 +74,6 @@ router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
     res.redirect("/connexionUser")
    }
 
-})
-
-router.get('/home/Garantie_non_acquise',(req,res,next)=>{
-  if(req.cookies.infoUser){
-    res.render("user/Garantie_non_acquise", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
-   }else{
-    res.redirect("/connexionUser")
-   }
 })
 
 /////////////////////////////chemin pour formulaire sans adversaire/////////////////////////////////////
@@ -175,7 +162,6 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
     const element_prod=req.body.element_prod;
     const attestation=req.body.attestation;
     const sinistre=req.body.sinistre;
-    const contrat_det=req.body.contrat_det;
    
     let declaration={
 
@@ -194,7 +180,6 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
 
     }
   console.log(declaration)
-  console.log(contrat_det)
 
   let connexion = mysql.createConnection({
       host : db.hostname,
@@ -219,8 +204,8 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
              res.redirect("/users/home/sinistres/Dommage_corporels_avec_adversaire")
           }else if(cat_sinistre=="DM" || cat_sinistre=="DM/DC"){
             if ( sinistre=="VOL"){
-                 
-               
+
+
 
                res.redirect("/users/home/sinistres/vol_avec_adversaire")
             }else if (sinistre=="BDG"){
@@ -239,8 +224,9 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
              res.redirect("/users/home/sinistres/Dommage_corporels")
           }else if(cat_sinistre=="DM"|| cat_sinistre=="DM/DC"){
             if ( sinistre=="VOL"){
-                 for(var i=0; i<contrat_det.length; i++) {
-                     if( contrat_det[i] ==="Vol,Vol accessoires,Vol armé"|| contrat_det[i] ==="Tous Risques") {
+             
+              for(var i=0; i<contrat_det.length; i++) {
+                     if( contrat_det[i] =="Vol,Vol accessoires,Vol armé" || contrat_det[i] =="Tous Risques") {
                         res.redirect("/users/home/sinistres/vol/")
                         console.log("garantie acquise")
                       }else{
@@ -249,9 +235,10 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
                        res.redirect("/users/home/Garantie_non_acquise")
                       }
                     }
+
+
+
             }else if (sinistre=="BDG"){
-
-
               res.redirect("/users/home/sinistres/Bris_de_Glace")
 
             }else if (sinistre=="I"){
