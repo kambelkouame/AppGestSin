@@ -145,6 +145,12 @@
                                          <input type="hidden" name="nom" value="<%=infoUser.client.nom %>">
                                           <input type="hidden" name="prenom" value="<%=infoUser.client.prenom %>">
                                            <input type="hidden" name="ID" value="<%=contrats.avenant_id %>">
+                                             <% details.garanties.forEach((detail)=>{ %>
+                            <% if (detail.libelle){ %>
+                             <input type="hidden" name="contrat_det" id="disabledTextInput" class="form-control" value="<%=detail.libelle %>">
+                              
+                                    <% } %>
+                                    <% }) %>
                                           
                                     </div>
                                 </div>
@@ -153,7 +159,7 @@
                                  <div class="col-md-4 offset-md-8">
                                     <label for="disabledTextInput">Votre Assurance</label>
                                     <div >
-                                        <input type="text" name="assurance" id="disabledTextInput" class="form-control" value="<%= details.libelle %>">
+                                <input type="text" name="contrat_det" id="disabledTextInput" class="form-control" placeholder="assurance">
                                     </div>
                                 </div>
                             </div>
