@@ -30,50 +30,40 @@ const con = mysql.createConnection({
 })
 
 
-router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
+
+router.get('/home/sinistre/Garantie_non_acquise/',(req,res,next)=>{
   if(req.cookies.infoUser){
- 
-      fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192)')
-        .then(result => result.json())
-       // .then(json => console.log(json));
-        .then(body =>{
-        //  console.log(body)
-          //let resultat =[]
-            let contrat 
-            //  resutlat[0]
-          body.data.forEach(b=>{
-            if(b.numero_police==req.params.numero_police) contrat=b //resultat.push(b)
-          })
-           
- console.log(contrat.avenant_id)
-                  
-           let  Lien1 = 'https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/details_contrat/';
-           let ID =contrat.avenant_id
-           var url = Lien1 + ID
-           fetch(url)
-            .then(res => res.json())
-            .then(detail=>{
-           /* let  contain
-             console.log(detail)
-            
-               detail.garanties.forEach(d => {
-            
-                for (var i = 1; i < d.id.length; i++) {
-                  d.libelle[i]
-                  console.log(d.libelle[i])
-               } contain=d})
-               console.log(contain)*/
-          res.render('user/formPrereq', { title: 'SIIN', contrats:contrat ,details:detail, infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
-          })
-      
-       })
-
-
-   // res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/garantie_non_acquise", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
+})
 
+
+router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    console.log(req.params.numero_police)
+    fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192?page='+req.params.page)
+    .then(result => result.json())
+    .then(body => {
+          let result=[]
+          body.data.forEach(b=>{
+            if(b.numero_police==req.params.numero_police) result=b
+               })
+          console.log(result.avenant_id)
+          var ID = result.avenant_id
+          var host='https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/details_contrat/'
+          var url = host+ID
+           fetch(url)
+            .then((response) => response.json())
+            .then(info =>{
+
+    res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser,info:body,details:info, numero_police:req.params.numero_police})
+  })
+          })
+   }else{
+    res.redirect("/connexionUser")
+   }
 })
 
 /////////////////////////////chemin pour formulaire sans adversaire/////////////////////////////////////
@@ -162,6 +152,8 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
     const element_prod=req.body.element_prod;
     const attestation=req.body.attestation;
     const sinistre=req.body.sinistre;
+    
+      const contrat_det= req.body.contrat_det;
    
     let declaration={
 
@@ -180,7 +172,7 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
 
     }
   console.log(declaration)
-
+ console.log(contrat_det)
   let connexion = mysql.createConnection({
       host : db.hostname,
       user : db.username,
@@ -189,24 +181,18 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
       port : db.port,
     })
 
+
+
   connexion.query(sql,declaration) ,( err,result)=>{
       if(err){
         console.log(err.message)
       }
     }
-   
-
-
-  
-
     if ( type_sinistre =="SAA"){
           if( cat_sinistre =="DC"){
              res.redirect("/users/home/sinistres/Dommage_corporels_avec_adversaire")
           }else if(cat_sinistre=="DM" || cat_sinistre=="DM/DC"){
             if ( sinistre=="VOL"){
-
-
-
                res.redirect("/users/home/sinistres/vol_avec_adversaire")
             }else if (sinistre=="BDG"){
               res.redirect("/users/home/sinistres/Bris_de_Glace_avec_adversaire")
@@ -224,20 +210,22 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
              res.redirect("/users/home/sinistres/Dommage_corporels")
           }else if(cat_sinistre=="DM"|| cat_sinistre=="DM/DC"){
             if ( sinistre=="VOL"){
-             
+
               for(var i=0; i<contrat_det.length; i++) {
+                  
                      if( contrat_det[i] =="Vol,Vol accessoires,Vol armé" || contrat_det[i] =="Tous Risques") {
-                        res.redirect("/users/home/sinistres/vol/")
+
+                        res.redirect("/users/home/sinistres/vol")
                         console.log("garantie acquise")
                       }else{
                
                        console.log("garantie non acquise")
-                       res.redirect("/users/home/Garantie_non_acquise")
+
+                       res.redirect("/users/home/sinistre/Garantie_non_acquise/")
                       }
                     }
 
-
-
+              
             }else if (sinistre=="BDG"){
               res.redirect("/users/home/sinistres/Bris_de_Glace")
 
@@ -345,7 +333,6 @@ router.post('/home/sinistres/vol/env',(req,res,next)=>{
 router.post('/home/sinistres/Incendie/send',(req,res,next)=>{
   console.log(req.body.constat)
     
-
     let sql  = "INSERT INTO sinistredetails SET ?";
     
     const num_police=req.body.num_police;
@@ -370,7 +357,6 @@ router.post('/home/sinistres/Incendie/send',(req,res,next)=>{
     const Assurance=req.body.Assurance;
    
     let declarationdetails={
-
         num_police:num_police,
         Localisation:Localisation,
         Vol_accessoire:vol_accessoire,
@@ -391,10 +377,8 @@ router.post('/home/sinistres/Incendie/send',(req,res,next)=>{
         souscripteur:souscripteur,
         type_de_garantie:type_de_garantie,
         Assurance:Assurance,
-
     }
   console.log(declarationdetails)
-
   let connexion = mysql.createConnection({
       host : db.hostname,
       user : db.username,
@@ -402,17 +386,14 @@ router.post('/home/sinistres/Incendie/send',(req,res,next)=>{
       database : db.dbname,
       port : db.port,
     })
-
   connexion.query(sql,declarationdetails) ,( err,result)=>{
       if(err){
         console.log(err.message)
       }
     }
-
      res.redirect("/home/contrats/1")
     
   });
-
 */
     
    
@@ -426,7 +407,7 @@ if(req.cookies.infoUser){
     let temps = new Date()
     let sql  = "select * from declaration_2 where nom = ? and prenoms = ?"
     con.query(sql,[req.cookies.infoUser.client.nom,req.cookies.infoUser.client.prenom],(err,result,fields)=>{
-      fetch('http://localhost:5001/chain')
+     fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
 res.render('user/sinistres/', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoUser})
@@ -446,8 +427,8 @@ router.get('/home/contrats/:page', function(req, res, next) {
 
 //verification de l'existence de la variable cookie 'user'
 if(req.cookies.infoUser){
-	//si la variable existe retourner la vue dashboard
-	fetch('http://localhost:5001/chain')
+  //si la variable existe retourner la vue dashboard
+  fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
       fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192?page='+req.params.page)
@@ -464,13 +445,13 @@ if(req.cookies.infoUser){
           contratValide.data.push(cont)
         }
       })
-      res.render('user/contrats/', { title: 'SIIN',blocks:body, contrats:contratValide, data:req.cookies.infoUser})
+      res.render('user/contrats/', { title: 'Express',blocks:body, contrats:contratValide, data:req.cookies.infoUser})
     })
      });
 
 }else{
-	//sinon retourner connexion
-	res.redirect("/connexionUser")
+  //sinon retourner connexion
+  res.redirect("/connexionUser")
 }
 });
 
@@ -484,22 +465,22 @@ router.get('/addDeclaration', function(req, res, next) {
 });
 
 router.get('/deconnexion', function(req, res, next) {
-	//supprimer la variable cookie user
-	res.clearCookie("infoUser")
-	//retourne la vue connexion
-	res.redirect("/connexionUser")
+  //supprimer la variable cookie user
+  res.clearCookie("infoUser")
+  //retourne la vue connexion
+  res.redirect("/connexionUser")
 });
 
 router.post("/loginUser", function(req, res){
  
-  	email= req.body.email,
-  	password= req.body.password
+    email= req.body.email,
+    password= req.body.password
  
 
 
  let user ={
-   	email:email,
-   	password:password,
+    email:email,
+    password:password,
    }
 
   user = JSON.stringify(user)
@@ -513,12 +494,12 @@ console.log(user)
     })
     .then(res => res.json())
     .then(json =>{
-    	if(json.error){
-    		console.log("erreur")
-    	}else{
-    		res.cookie("infoUser",json)
-    		res.redirect("/users/home/contrats/1")
-    	}
+      if(json.error){
+        console.log("erreur")
+      }else{
+        res.cookie("infoUser",json)
+        res.redirect("/users/home/contrats/1")
+      }
     })
 
 });
@@ -548,17 +529,17 @@ if(req.cookies.infoAgent){
 
 
 router.get('/deconnexion', function(req, res, next) {
-	//supprimer la variable cookie user
-	res.clearCookie("infoAgent")
-	//retourne la vue connexion
-	res.redirect("/connexionAgent")
+  //supprimer la variable cookie user
+  res.clearCookie("infoAgent")
+  //retourne la vue connexion
+  res.redirect("/connexionAgent")
 });
 
 
 router.post("/loginAgent", function(req, res){
  
-  	email= req.body.email,
-  	password= req.body.password
+    email= req.body.email,
+    password= req.body.password
  
 let connexion = mysql.createConnection({
       host : db.hostname,
@@ -580,12 +561,12 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
       if(results[0].password == password){
 
          console.log('faux')
-      	//creation de la variable cookie
-      	
+        //creation de la variable cookie
+        
 
-        if(results[0].fonction == "gestionnaire"){
+        if(results[0].fonction== "gestionnaire"){
           res.cookie("infoAgent", results[0])
-          res.render('agent/sinistres/index', { title: 'Express',blocks:body,data:req.cookies.infoAgent})
+          res.redirect('/agent/home')
         } 
         else if (results[0].fonction=="policier"){
           res.cookie("infoAgent", results[0])
@@ -599,7 +580,7 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
         else{
           res.redirect('/connexionAgent')
         }
-      	//retour a la vue user  
+        //retour a la vue user  
       }
       else{
        res.redirect('/connexionAgent')
@@ -607,7 +588,7 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
       }
     }
     else{
-    	res.redirect('/connexionAgent')
+      res.redirect('/connexionAgent')
     }
   }
 

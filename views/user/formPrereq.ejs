@@ -144,14 +144,18 @@
                                         <input type="hidden" name="num_police" value="<%=numero_police %>">
                                          <input type="hidden" name="nom" value="<%=infoUser.client.nom %>">
                                           <input type="hidden" name="prenom" value="<%=infoUser.client.prenom %>">
-                                          <% details.garanties.forEach((detail)=>{ %>
-                            <% if (detail.libelle){ %>
-                             <input type="hidden" name="contrat_det" id="disabledTextInput" class="form-control" value="<%=detail.libelle %>">
-                              
-                                    <% } %>
-                                    <% }) %>
+                                         
                                           
-                                          
+
+
+                                           <% details.garanties.forEach((detail)=>{ %>
+                                <% if (detail.libelle){ %>
+                                 <input type="hidden" name="contrat_det" id="disabledTextInput" class="form-control" value="<%=detail.libelle %>">
+                                  
+                                        <% } %>
+                                        <% }) %>
+
+                                        
                                     </div>
                                 </div>
                             </div>
