@@ -20,7 +20,8 @@ app.use(body.json()); // for parsing application/json
 app.use(body.urlencoded({ extended: true }));
 
 
-
+var donneeFetch
+var donneefetch2
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -31,7 +32,7 @@ const con = mysql.createConnection({
 
 
 
-router.get('/home/sinistre/Garantie_non_acquise/',(req,res,next)=>{
+router.get('/home/sinistre/Garantie_non_acquise/:numero_police',(req,res,next)=>{
   if(req.cookies.infoUser){
     res.render("user/garantie_non_acquise", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
@@ -58,7 +59,7 @@ router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
             .then((response) => response.json())
             .then(info =>{
 
-    res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser,info:body,details:info, numero_police:req.params.numero_police})
+    res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser,donneefetch2:body,donneeFetch:info, numero_police:req.params.numero_police})
   })
           })
    }else{
@@ -78,7 +79,7 @@ router.get('/home/sinistres/Dommage_corporels',(req,res,next)=>{
 
 router.get('/home/sinistres/vol',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/sansadversaire/formVol", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/sansadversaire/formVol", {host:req.hostname,infoUser:req.cookies.infoUser,donneefetch2,donneeFetch, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
@@ -152,6 +153,7 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
     const element_prod=req.body.element_prod;
     const attestation=req.body.attestation;
     const sinistre=req.body.sinistre;
+     const ID=req.body.ID;
     
       const contrat_det= req.body.contrat_det;
    
@@ -210,22 +212,7 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
              res.redirect("/users/home/sinistres/Dommage_corporels")
           }else if(cat_sinistre=="DM"|| cat_sinistre=="DM/DC"){
             if ( sinistre=="VOL"){
-
-              for(var i=0; i<contrat_det.length; i++) {
-                  
-                     if( contrat_det[i] =="Vol,Vol accessoires,Vol armé" || contrat_det[i] =="Tous Risques") {
-
-                        res.redirect("/users/home/sinistres/vol")
-                        console.log("garantie acquise")
-                      }else{
-               
-                       console.log("garantie non acquise")
-
-                       res.redirect("/users/home/sinistre/Garantie_non_acquise/")
-                      }
-                    }
-
-              
+          res.redirect("/users/home/sinistres/vol")
             }else if (sinistre=="BDG"){
               res.redirect("/users/home/sinistres/Bris_de_Glace")
 
@@ -246,10 +233,8 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
   }
   });
 
-///////////////////////////////////formulaire vole//////////////
-router.post('/home/sinistres/vol/env',(req,res,next)=>{
-  console.log(req.body.constat)
-    
+///////////////////////////////////formulaire vol//////////////
+router.post('/home/sinistres/send',(req,res,next)=>{
 
     let sql  = "INSERT INTO sinistrevoldetails SET ?";
     
@@ -322,7 +307,44 @@ router.post('/home/sinistres/vol/env',(req,res,next)=>{
       }
     }
 
-     res.redirect("/users/home/contrats/1")
+
+
+
+    /*
+      contrat_det.forEach(element=>{
+                console.log(element)
+                if(element==="Vol,Vol accessoires,Vol armé"){
+                  
+                  console.log("garantie aquise")
+                  res.redirect("/users/home/contrats/1")
+
+                } 
+
+               
+             }
+              )
+              if (contrat_det!=="Vol,Vol accessoires,Vol armé"){
+                  console.log("garantie non acquise")
+                  
+                 res.redirect("/users/home/sinistre/Garantie_non_acquise/")
+                } 
+                 /*
+            
+              for(var i=0; i<=contrat_det.length; i++) {
+                  console.log(contrat_det)     
+                     if( contrat_det[i] !=="Vol,Vol accessoires,Vol armé" || contrat_det[i] !=="Tous Risques") {
+                        res.redirect("/users/home/sinistres/vol")
+                        console.log(contrat_det[i])
+                      }else{
+               
+                       console.log("garantie non acquise")
+                      console.log(contrat_det[i])
+                       res.redirect("/users/home/sinistre/Garantie_non_acquise/")
+                      }
+                    }
+              */
+
+     
     
   });
 
@@ -445,7 +467,7 @@ if(req.cookies.infoUser){
           contratValide.data.push(cont)
         }
       })
-      res.render('user/contrats/', { title: 'Express',blocks:body, contrats:contratValide, data:req.cookies.infoUser})
+      res.render('user/contrats/', { title: 'SIIN',blocks:body, contrats:contratValide, data:req.cookies.infoUser})
     })
      });
 

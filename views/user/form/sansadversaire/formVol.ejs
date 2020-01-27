@@ -133,162 +133,196 @@
                     
                     
 
-                    <form  method="post" action="env" class="m-t-40">
-                            <div class="card  shadow p-3 mb-5 bg-white rounded">
-                               <section>
-                                <div class="row">
-                                     <div class="col-md-4 offset-md-8">
-                                        <label for="disabledTextInput">Numero de Police</label>
-                                            <div >
-                                                <input type="text" name="numero_police" id="disabledTextInput" class="form-control" value="<%=numero_police %>" >
-                                            </div>
-                                    </div>
-                                </div>
-
-                                 <div class="row">
-                                     <div class="col-md-4 offset-md-8">
-                                        <label for="disabledTextInput">Votre Assurance</label>
-                                        <div >
-                                            <input name="Assurance" type="text" id="disabledTextInput" class="form-control" value="<%=infoUser.client.nom %>" >
-                                        </div>
-                                    </div>
-                                </div>
-                                  <br><br><br>
-                                <h3>SINISTRES</h3>
-                                <br>
-                                  <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <div>
-                                                <label>Lieu du sinistre( avec Précision)</label>
-                                                <div class="input-group">
-                                                   <input name="Localisation" type="text" class="form-control" placeholder="ville,Commune,quatier">
-                                                   </div>
-                                            </div>
-                                        </div>   
-                                    </div>
-                                    <div class="col-6">
-
-                                         <div class="form-group">
-                                            <div>
-                                                <label>Dommage Apparent</label>
-                                                <select class="select2 form-control custom-select">
-                                                    <optgroup>
-                                                        <option value="DC">Vitre brisé</option>
-                                                        <option value="DM">Parre Brise cassé</option>
-                                                        <option value="DM/DC">DOMMAGE MATERIEL ET CORPOREL</option>
-                                                    </optgroup> 
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
-                                  </div>
-
-                                  <div class="row">
-                                            <div class="col-sm">
-                                                <label>Type de Vol</label>
-                                             <div class="input-group mb-3">
-                                                  <div class="input-group-prepend">
-                                                    <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                                                  </div>
-                                                  <select  name="type_vol" class="custom-select" id="inputGroupSelect01">
-                                                    <option value="Vol des accessoires">Vol des accessoires</option>
-                                                    <option value="Vol complet">Vol complet</option>
-                                                  </select>
-                                                </div>  
-                                                
-                                              
-                                            </div>
+   <form  method="post" action="send" class="m-t-40">
 
 
-                                  </div>
-                  
 
-                              <br><br>
-                             <h4> INFORMATION SUR LE TEMOINS </h4>              
-                             <br>
+     <div class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">SINISTRES</h4>
+              </div>
+              <div class="row">
+               <div class="col-md-4 offset-md-8">
+                  <label for="disabledTextInput">Numero de Police</label>
+                      <div >
+                          <input type="text" name="numero_police" id="disabledTextInput" class="form-control" value="<%=infos.numero_police %>" >
+                      </div>
+              </div>
+          </div>
 
-
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="form-group">
-                                         <label >Nom et Prenom du temoin</label>
-                                    <div class="input-group">
-                                     <input name="nom_temoin" tynom_temoinpe="text" class="form-control">
-                                    </div>
-                                      
-                                         </div>
-                                    </div>
-                                   
-                                <div class="col-sm">
-
-                                    <div class="form-group">
-                                         
-                                        <label>Adresse du temoin  </label>
-                                             <div>
-                                                <div class="form-group">
-                                                     <input name="adresse_temoin" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                         </div>
-                                </div>
-                                <div class="col-sm">
-                                  <div class="form-group">  
-                                        <label>contact du temoin </label>
-                                                    <div>
-                                                <div class="form-group">
-                                                      <input type="text" name="telephone_temoin" class="form-control phone-inputmask" id="phone-mask" placeholder="Entrer le contact ">
-                                                </div>
-                                            </div>
-                                         </div>
-                                </div>
+           <div class="row">
+               <div class="col-md-4 offset-md-8">
+                  <label for="disabledTextInput">Votre Assurance</label>
+                  <div >
+                      <input name="Assurance" type="text" id="disabledTextInput" class="form-control" value="<%=infoUser.client.nom %>" >
+                  </div>
+              </div>
+          </div>
+         
+          
+            <div class="row">
+              <div class="col-6">
+                  <div class="form-group">
+                      <div>
+                          <label>Lieu du sinistre( avec Précision)</label>
+                          <div class="input-group">
+                             <input name="Localisation" type="text" class="form-control" placeholder="ville,Commune,quatier">
                              </div>
+                      </div>
+                  </div>   
+              </div>
+              <div class="col-6">
 
-                             <div class="row">
-                                  <div class="col-sm">
-                                    <label>Importer les photos du sinistre </label>
-                                            <div class="custom-file">
-                                                <input name="photo_vol" type="file" class="custom-file-input" id="validatedCustomFile">
-                                                <label class="custom-file-label" for="validatedCustomFile"></label>
-                                            </div>
+               <div class="form-group">
+                  <div>
+                      <label>Dommage Apparent</label>
+                      <select class="select2 form-control custom-select">
+                          <optgroup>
+                              <option value="DC">Vitre brisé</option>
+                              <option value="DM">Parre Brise cassé</option>
+                              <option value="DM/DC">DOMMAGE MATERIEL ET CORPOREL</option>
+                          </optgroup> 
+                      </select>
+                  </div>
+              </div>
+          </div>
+                                   
+          </div>
 
-                                  </div>
-                                        
-                                </div>
-                                </section>
-                                <br><br>
+          <div class="row">
+                    <div class="col-sm">
+                        <label>Type de Vol</label>
+                     <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                          </div>
+                          <select  name="type_vol" class="custom-select" id="inputGroupSelect01">
+                            <option value="Vol des accessoires">Vol des accessoires</option>
+                            <option value="Vol complet">Vol complet</option>
+                          </select>
+                        </div>  
+                        
+                      
+                    </div>
 
-                                <h3>INFORMATIONS SUR L'ASSURE</h3>
-                                <section> 
-                            <br>
+
+          </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Je suis la la</h4>
+              </div>
+              <div class="card-body">
+                
+                
+                
+               
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="places-buttons">
+                  <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto text-center">
+                      <h4 class="card-title">
+                        Section 3
+                        <p class="category">Veillez remplir cettre section</p>
+                      </h4>
+                    </div>
+                  </div>
+
+
+          <br><br>
+                     <h4> INFORMATION SUR LE TEMOINS </h4>              
+                     <br>
+
 
                     <div class="row">
-                      <div class="col-6">
-                          <div class="form-group">
-                              <div>
-                                  <label>Nom de famille de l'assuré</label>
-                                   <div class="input-group">
-                                           <input name="nom" value="<%=infoUser.client.nom %>" type="text" class="form-control">
-                                  </div>
-                              </div>
-                          </div>
-                          
-                        
-                      </div>
-                      <div class="col-6">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                 <label >Nom et Prenom du temoin</label>
+                            <div class="input-group">
+                             <input name="nom_temoin" tynom_temoinpe="text" class="form-control">
+                            </div>
+                              
+                                 </div>
+                            </div>
+                           
+                        <div class="col-sm">
 
-                           <div class="form-group">
-                              <div>
-                                  <label>Prenom</label>
-                                    <div class="input-group">
-                                           <input name="prenom" value="<%=infoUser.client.prenom %>" type="text" class="form-control">
-                                      </div>
-                              </div>
+                            <div class="form-group">
+                                 
+                                <label>Adresse du temoin  </label>
+                                     <div>
+                                        <div class="form-group">
+                                             <input name="adresse_temoin" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="col-sm">
+                          <div class="form-group">  
+                                <label>contact du temoin </label>
+                                            <div>
+                                        <div class="form-group">
+                                              <input type="text" name="telephone_temoin" class="form-control phone-inputmask" id="phone-mask" placeholder="Entrer le contact ">
+                                        </div>
+                                    </div>
+                                 </div>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                          <div class="col-sm">
+                            <label>Importer les photos du sinistre </label>
+                                    <div class="custom-file">
+                                        <input name="photo_vol" type="file" class="custom-file-input" id="validatedCustomFile">
+                                        <label class="custom-file-label" for="validatedCustomFile"></label>
+                                    </div>
+
+                          </div>
+                                
+                        </div>
+                        </section>
+                        <br><br>
+
+                        <h3>INFORMATIONS SUR L'ASSURE</h3>
+                        <section> 
+                    <br>
+
+            <div class="row">
+              <div class="col-6">
+                  <div class="form-group">
+                      <div>
+                          <label>Nom de famille de l'assuré</label>
+                           <div class="input-group">
+                                   <input name="nom" value="<%=infoUser.client.nom %>" type="text" class="form-control">
                           </div>
                       </div>
-                     
-                    </div>
+                  </div>
+                  
+                
+              </div>
+              <div class="col-6">
+
+                   <div class="form-group">
+                      <div>
+                          <label>Prenom</label>
+                            <div class="input-group">
+                                   <input name="prenom" value="<%=infoUser.client.prenom %>" type="text" class="form-control">
+                              </div>
+                      </div>
+                  </div>
+              </div>
+             
+            </div>
            
 
             <div class="row">
@@ -381,11 +415,30 @@
                             <div class="col-sm">
                             <label>Date de Péremption du permis</label>
                             <div class="input-group">
-                              <input name="fin_permis" type="text" class="form-control">
+                              <input name="fin_permis" type="date" class="form-control">
                               </div>
                           </div>
                                 
                     </div>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+                            <div class="card  shadow p-3 mb-5 bg-white rounded">
+                               <section>
+                               
+                  
+
+                              
                                 </section>
 
 
@@ -400,7 +453,7 @@
                         <div>
                             <label>date de Debut du contrat</label>
                              <div class="input-group">
-                                     <input name="date_debut_cont" type="text" class="form-control" >
+                                     <input name="date_debut_cont" type="date" class="form-control" >
                             </div>
                         </div>
                     </div>
@@ -413,7 +466,7 @@
                         <div>
                             <label>Date Fin du contrat</label>
                               <div class="input-group">
-                                     <input name="date_fin_cont" type="text" class="form-control" >
+                                     <input name="date_fin_cont" type="date" class="form-control" >
                                 </div>
                         </div>
                     </div>
