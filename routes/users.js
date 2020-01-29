@@ -19,9 +19,9 @@ var app = require('express')()
 app.use(body.json()); // for parsing application/json
 app.use(body.urlencoded({ extended: true }));
 
-
-var donneeFetch
-var donneefetch2
+var num_police 
+var donnee2
+var donnee1={}
 const con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -32,7 +32,7 @@ const con = mysql.createConnection({
 
 
 
-router.get('/home/sinistre/Garantie_non_acquise/:numero_police',(req,res,next)=>{
+router.get('/home/sinistre/Garantie_non_acquise',(req,res,next)=>{
   if(req.cookies.infoUser){
     res.render("user/garantie_non_acquise", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
@@ -43,25 +43,11 @@ router.get('/home/sinistre/Garantie_non_acquise/:numero_police',(req,res,next)=>
 
 router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
   if(req.cookies.infoUser){
-    console.log(req.params.numero_police)
-    fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192?page='+req.params.page)
-    .then(result => result.json())
-    .then(body => {
-          let result=[]
-          body.data.forEach(b=>{
-            if(b.numero_police==req.params.numero_police) result=b
-               })
-          console.log(result.avenant_id)
-          var ID = result.avenant_id
-          var host='https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/details_contrat/'
-          var url = host+ID
-           fetch(url)
-            .then((response) => response.json())
-            .then(info =>{
-
-    res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser,donneefetch2:body,donneeFetch:info, numero_police:req.params.numero_police})
-  })
-          })
+      
+      num_police=req.params.numero_police
+    res.render("user/formPrereq", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+ 
+          
    }else{
     res.redirect("/connexionUser")
    }
@@ -79,7 +65,7 @@ router.get('/home/sinistres/Dommage_corporels',(req,res,next)=>{
 
 router.get('/home/sinistres/vol',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/sansadversaire/formVol", {host:req.hostname,infoUser:req.cookies.infoUser,donneefetch2,donneeFetch, numero_police:req.params.numero_police})
+    res.render("user/form/sansadversaire/formVol", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
@@ -173,8 +159,9 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
         sinistre:sinistre,
 
     }
+
   console.log(declaration)
- console.log(contrat_det)
+
   let connexion = mysql.createConnection({
       host : db.hostname,
       user : db.username,
@@ -211,8 +198,8 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
        if( cat_sinistre =="DC"){
              res.redirect("/users/home/sinistres/Dommage_corporels")
           }else if(cat_sinistre=="DM"|| cat_sinistre=="DM/DC"){
-            if ( sinistre=="VOL"){
-          res.redirect("/users/home/sinistres/vol")
+            if ( sinistre=="VOL"){     
+        res.redirect("/users/home/sinistres/vol")
             }else if (sinistre=="BDG"){
               res.redirect("/users/home/sinistres/Bris_de_Glace")
 
@@ -292,6 +279,7 @@ router.post('/home/sinistres/send',(req,res,next)=>{
 
     }
   console.log(sinistrevoldetails)
+  console.log(num_police)
 
   let connexion = mysql.createConnection({
       host : db.hostname,
@@ -308,10 +296,44 @@ router.post('/home/sinistres/send',(req,res,next)=>{
     }
 
 
+     fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192?page='+req.params.page)
+    .then(result => result.json())
+    .then(body => {
+
+          let result=[]
+          body.data.forEach(b=>{
+            if(b.numero_police==num_police) result=b
+               })
+
+          console.log(result.avenant_id)
+          var ID = result.avenant_id
+          var host='https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/details_contrat/'
+          var url = host+ID
+           fetch(url)
+            .then((response) => response.json())
+            .then(info =>{
+              info.garanties.forEach(element=>{
+                console.log(element)
+                if(element.libelle==="Vol,Vol accessoires,Vol armé"){
+                  
+                  console.log("garantie acquise")
+                  res.redirect("/users/home/contrats/1")} 
+                  })
+             
+
+              if (info.garanties.libelle !=="Vol,Vol accessoires,Vol armé"){
+                  console.log("garantie non acquise")
+                  
+                 res.redirect("/users/home/sinistre/Garantie_non_acquise/")
+                } 
+                 
+              })
+          })
+      
+      /*
 
 
-    /*
-      contrat_det.forEach(element=>{
+      donnee1.garanties.forEach(element=>{
                 console.log(element)
                 if(element==="Vol,Vol accessoires,Vol armé"){
                   
@@ -323,7 +345,7 @@ router.post('/home/sinistres/send',(req,res,next)=>{
                
              }
               )
-              if (contrat_det!=="Vol,Vol accessoires,Vol armé"){
+              if (donnee1.garanties!=="Vol,Vol accessoires,Vol armé"){
                   console.log("garantie non acquise")
                   
                  res.redirect("/users/home/sinistre/Garantie_non_acquise/")
