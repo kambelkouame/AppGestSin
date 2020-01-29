@@ -225,7 +225,6 @@ router.post('/home/sinistres/send',(req,res,next)=>{
 
     let sql  = "INSERT INTO sinistrevoldetails SET ?";
     
-    const numero_police=req.body.numero_police;
     const Localisation=req.body.Localisation;
     const type_vol=req.body.type_vol;
     const nom_temoin=req.body.nom_temoin;
@@ -252,7 +251,7 @@ router.post('/home/sinistres/send',(req,res,next)=>{
    
     let sinistrevoldetails={
 
-        numero_police:numero_police,
+        numero_police:num_police,
         Localisation:Localisation,
         type_vol:type_vol,
         nom_temoin:nom_temoin,
@@ -276,6 +275,7 @@ router.post('/home/sinistres/send',(req,res,next)=>{
         souscripteur:souscripteur,
         type_Garantie:type_Garantie,
         Assurance:Assurance,
+        niveau:"O/E"
 
     }
   console.log(sinistrevoldetails)
@@ -449,13 +449,16 @@ router.get('/home/sinistres', function(req, res, next) {
 if(req.cookies.infoUser){
   con.connect(()=>{
     let temps = new Date()
-    let sql  = "select * from declaration_2 where nom = ? and prenoms = ?"
+    let sql  = "select * from sinistrevoldetails where nom = ? and prenom = ?"
+    let sql2  = "select * from sinistre where nom = ? and prenom = ?"
     con.query(sql,[req.cookies.infoUser.client.nom,req.cookies.infoUser.client.prenom],(err,result,fields)=>{
+      con.query(sql2,[req.cookies.infoUser.client.nom,req.cookies.infoUser.client.prenom],(err,result2,fields)=>{
      fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
-res.render('user/sinistres/', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoUser})
+res.render('user/sinistres/', { title: 'Express',blocks:body,sinistres2:result2, sinistres:result, data:req.cookies.infoUser})
 })
+   })
     })
     })
   //si la variable existe retourner la vue dashboard
@@ -610,6 +613,7 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
 
         if(results[0].fonction== "gestionnaire"){
           res.cookie("infoAgent", results[0])
+          console.log(infoAgent)
           res.redirect('/agent/home')
         } 
         else if (results[0].fonction=="policier"){

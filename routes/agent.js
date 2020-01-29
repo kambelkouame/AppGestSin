@@ -27,8 +27,8 @@ router.get('/home', function(req, res, next) {
 if(req.cookies.infoAgent){
   con.connect(()=>{
     let temps = new Date()
-    let sql  = "select * from declaration_2 where niveau = ? and constat = ?"
-    con.query(sql,["ordre et expert","oui"],(err,result,fields)=>{
+    let sql  = "select * from sinistrevoldetails where niveau = ?"
+    con.query(sql,["O/E"],(err,result,fields)=>{
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {

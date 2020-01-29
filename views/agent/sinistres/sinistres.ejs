@@ -8,7 +8,7 @@
 
          <div class="card card-chart col-12 mt-3 p-3">
               <div class="card-header">
-                <h4 class="card-title"><%= sinistre.type_sinistre %></h4>
+                <h4 class="card-title"><%= sinistre.type_vol %></h4>
                 <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                     <i class="now-ui-icons loader_gear"></i>
@@ -21,10 +21,10 @@
                 </div>
               </div>
               <div class="card-body">
-                <small>n° police : <%= sinistre.num_police %></small><br>
-                <small>date : <%= sinistre.date_declaration %></small><br>
-                <small>nb morts : <%= sinistre.nb_mort %></small><br>
-                <small>nb blesses : <%= sinistre.nb_blesse %></small><br>
+                <small>n° police : <%= sinistre.numero_police %></small><br>
+                <small>date : <%= sinistre.nom %></small><br>
+                <small>nb morts : <%= sinistre.prenom %></small><br>
+                <small>nb blesses : <%= sinistre.email %></small><br>
                 <small>status : <%= sinistre.status %></small><br>
                 <small>assuré : <%= sinistre.nom %> <%= sinistre.prenoms %></small><br>
                
