@@ -1,0 +1,164 @@
+<! doctype html>
+< html  lang = " en " >
+< tête >
+    < title > Smart Wizard - un plugin JavaScript jQuery Step Wizard </ title >
+    < meta  charset = " UTF-8 " >
+    < meta  name = " viewport "  content = " width = device-width, initial-scale = 1, shrink-to-fit = no " >
+
+    <! - Inclure Bootstrap CSS ->
+    < Link  rel = " stylesheet "  href = " https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css "  intégrité = " SHA384-Gn5384xqQ1aoWXA + 058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW / dAiS6JXm "  crossorigin = " anonyme " >
+
+    <! - Inclure SmartWizard CSS ->
+    < link  href = "/dist/css/smart_wizard.css "  rel = " stylesheet "  type = " text / css " />
+
+    <! - Thème SmartWizard en option ->
+    < link  href = " /dist/css/smart_wizard_theme_circles.css "  rel = " stylesheet "  type = " text / css " />
+    < link  href = " /dist/css/smart_wizard_theme_arrows.css "  rel = " stylesheet "  type = " text / css " />
+    < link  href = "/dist/css/smart_wizard_theme_dots.css "  rel = " stylesheet "  type = " text / css " />
+</ tête >
+< corps >
+    < div  class = " container " >
+        < Br />
+        < form  action = " # "  id = " myForm "  role = " form "  data-toggle = " validator "  method = " post "  accept-charset = " utf-8 " >
+
+        <! - SmartWizard html ->
+        < div  id = " smartwizard " >
+            < ul >
+                < Li > < a  href = " # étape 1 " > Étape 1 < br /> < petite > Adresse e - mail </ petit > </ a > </ li >
+                < Li > < a  href = " # étape 2 " > Étape 2 < br /> < petit > Nom </ petit > </ a > </ li >
+                < Li > < a  href = " # étape 3 " > Étape 3 < br /> < petite > Adresse </ petit > </ a > </ li >
+                < Li > < a  href = " # étape 4 " > Étape 4 < br /> < petits > Conditions générales </ petit > </ a > </ li >
+            </ ul >
+
+            < div >
+                < div  id = " step-1 " >
+                    < h2 > Votre adresse e-mail </ h2 >
+                    < div  id = " form-step-0 "  role = " form "  data-toggle = " validator " >
+                        < div  class = " form-group " >
+                            < label  for = " email " > Adresse e-mail: </ label >
+                            < input  type = " email "  class = " form-control "  name = " email "  id = " email "  placeholder = " Écrivez votre adresse e-mail "  obligatoire >
+                            < div  class = " help-block with-errors " > </ div >
+                        </ div >
+                    </ div >
+
+                </ div >
+                < div  id = " step-2 " >
+                    < h2 > Votre nom </ h2 >
+                    < div  id = " form-step-1 "  role = " form "  data-toggle = " validator " >
+                        < div  class = " form-group " >
+                            < label  for = " name " > Nom: </ label >
+                            < input  type = " text "  class = " form-control "  name = " name "  id = " email "  placeholder = " Écrivez votre nom "  requis >
+                            < div  class = " help-block with-errors " > </ div >
+                        </ div >
+                    </ div >
+                </ div >
+                < div  id = " step-3 " >
+                    < h2 > Votre adresse </ h2 >
+                    < div  id = " form-step-2 "  role = " form "  data-toggle = " validator " >
+                        < div  class = " form-group " >
+                            < label  for = " address " > Adresse </ label >
+                            < textarea  class = " form-control "  name = " address "  id = " address "  rows = " 3 "  placeholder = " Écrivez votre adresse ... "  requis > </ textarea >
+                            < div  class = " help-block with-errors " > </ div >
+                        </ div >
+                    </ div >
+                </ div >
+                < div  id = " step-4 "  class = " " >
+                    < h2 > Conditions générales </ h2 >
+                    < p >
+                        Termes et conditions: Gardez votre sourire :)
+                    </ p >
+                    < div  id = " form-step-3 "  role = " form "  data-toggle = " validator " >
+                        < div  class = " form-group " >
+                            < label  for = " terms " > Je suis d'accord avec les conditions générales </ label >
+                            < input  type = " checkbox "  id = " terms "  data-error = " Veuillez accepter les conditions générales "  requises >
+                            < div  class = " help-block with-errors " > </ div >
+                        </ div >
+                    </ div >
+
+
+                </ div >
+            </ div >
+        </ div >
+
+        </ formulaire >
+
+    </ div >
+
+    <! - Inclure jQuery ->
+    < script  src = " https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js " > </ script >
+    <! - Inclure le plugin jQuery Validator ->
+    < script  src = " https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js " > </ script >
+
+
+    <! - Inclure la source JavaScript de SmartWizard ->
+    < script  type = " text / javascript "  src = " ../dist / js / jquery.smartWizard.min.js " > </ script >
+
+    < script  type = " text / javascript " >
+        $ ( document ). prêt ( fonction () {
+            // Boutons supplémentaires de la barre d'outils
+            var btnFinish =  $ ( ' <button> </button> ' ). texte ( ' Terminer ' )
+                                             . addClass ( ' btn btn-info ' )
+                                             . on ( ' click ' , function () {
+                                                    if ( ! $ ( this ). hasClass ( ' disabled ' )) {
+                                                        var elmForm =  $ ( " #myForm " );
+                                                        if (elmForm) {
+                                                            elmForm . validateur ( « valider » );
+                                                            var elmErr =  elmForm . find ( ' .has-error ' );
+                                                            if (elmErr &&  elmErr . longueur  >  0 ) {
+                                                                alert ( ' Oups, nous avons encore une erreur dans le formulaire ' );
+                                                                retour  faux ;
+                                                            } else {
+                                                                alert ( " Super! nous sommes prêts à soumettre le formulaire " );
+                                                                elmForm . soumettre ();
+                                                                retour  faux ;
+                                                            }
+                                                        }
+                                                    }
+                                                });
+            var btnCancel =  $ ( ' <button> </button> ' ). texte ( ' Annuler ' )
+                                             . addClass ( ' btn btn-danger ' )
+                                             . on ( ' click ' , function () {
+                                                    $ ( ' #smartwizard ' ). smartWizard ( " reset " );
+                                                    $ ( ' #myForm ' ). find ( " entrée, zone de texte " ). val ( " " );
+                                                });
+            // Assistant intelligent
+            $ ( ' #smartwizard ' ). smartWizard ({
+                    sélectionné :  0 ,
+                    thème :  « points » ,
+                    transitionEffect : ' fade ' ,
+                    toolbarSettings : {toolbarPosition :  ' bottom ' ,
+                                      toolbarExtraButtons : [btnFinish, btnCancel]
+                                    },
+                    anchorSettings : {
+                                markDoneStep :  true , // ajoute un css terminé
+                                markAllPreviousStepsAsDone :  true , // Lorsqu'une étape sélectionnée par le hachage d'URL, toutes les étapes précédentes sont marquées comme terminées
+                                removeDoneStepOnNavigateBack :  true , // Pendant la navigation, l'étape terminée après l'étape active sera effacée
+                                enableAnchorOnDoneStep :  true  // Activer / désactiver la navigation des étapes terminées
+                            }
+                 });
+            $ ( " #smartwizard " ). on ( " LeaveStep " , fonction ( e , anchorObject , stepNumber , stepDirection ) {
+                var elmForm =  $ ( " # form-step- "  + stepNumber);
+                // stepDirection === 'forward': - cette condition permet de faire la validation du formulaire
+                // uniquement sur la navigation vers l'avant, ce qui facilite la navigation vers l'arrière, mais toujours la validation lors de la prochaine étape
+                if (stepDirection ===  ' forward '  && elmForm) {
+                    elmForm . validateur ( « valider » );
+                    var elmErr =  elmForm . enfants ( ' .has-error ' );
+                    if (elmErr &&  elmErr . longueur  >  0 ) {
+                        // La validation du formulaire a échoué
+                        retour  faux ;
+                    }
+                }
+                return  true ;
+            });
+            $ ( " #smartwizard " ). on ( " showStep " , fonction ( e , anchorObject , stepNumber , stepDirection ) {
+                // Activer le bouton de finition uniquement à la dernière étape
+                if (stepNumber ==  3 ) {
+                    $ ( ' .btn-finish ' ). removeClass ( ' désactivé ' );
+                } else {
+                    $ ( ' .btn-finish ' ). addClass ( ' désactivé ' );
+                }
+            });
+        });
+    </ script >
+</ corps >
+</ html >

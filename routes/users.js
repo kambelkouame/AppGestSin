@@ -55,67 +55,110 @@ router.get('/home/addSinistre/:numero_police',(req,res,next)=>{
 
 /////////////////////////////chemin pour formulaire sans adversaire/////////////////////////////////////
 
-router.get('/home/sinistres/Dommage_corporels',(req,res,next)=>{
+router.get('/home/sinistres/Dc/Dommage_corporels',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/sansadversaire/formDommage", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/sansadversaire/Dc/formDommage", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
-router.get('/home/sinistres/vol',(req,res,next)=>{
+//DOMMAGE MATERIEL
+///////////
+///////////VOL
+
+router.get('/home/sinistres/Dm/vol',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/sansadversaire/formVol", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/sansadversaire/Dm/formVol", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
-router.get('/home/sinistres/Bris_de_Glace',(req,res,next)=>{
+///////////Bris de glace
+router.get('/home/sinistres/Dm/Bris_de_Glace',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/sansadversaire/formBrisG", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/sansadversaire/Dm/formBrisG", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+///////////Incendie
+router.get('/home/sinistres/Dm/Incendie',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/sansadversaire/Dm/formIncendie", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
-router.get('/home/sinistres/Incendie',(req,res,next)=>{
+
+//////DOMMAGE Corporel et Materiel
+///////////
+/////////////VOL
+router.get('/home/sinistres/DmDC/vol',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/sansadversaire/formIncendie", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/sansadversaire/DmDC/formVol", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+////////////Bris de glace
+router.get('/home/sinistres/DmDC/Bris_de_Glace',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/sansadversaire/DmDC/formBrisG", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionUser")
+   }
+})
+
+/////////Incendie
+router.get('/home/sinistres/DmDC/Incendie',(req,res,next)=>{
+  if(req.cookies.infoUser){
+    res.render("user/form/sansadversaire/DmDC/formIncendie", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
 ///////////////////////chemin//////////////////////////////////
+///////////////////////////fin chmin avec adversaire/////////////////////////////////////////
 
-router.get('/home/sinistres/Dommage_avec_adversaire',(req,res,next)=>{
+
+////////DOMMAGE CORPOREL
+
+router.get('/home/sinistres/Dc/Dommage_avec_adversaire',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/adversaire/formDomAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/adversaire/Dc/formDomAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
-router.get('/home/sinistres/vol_avec_adversaire',(req,res,next)=>{
+////////DOMMAGE MATERIEL
+
+////VOL
+router.get('/home/sinistres/Dm/vol_avec_adversaire',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/adversaire/formVolAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/adversaire/Dm/formVolAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
-router.get('/home/sinistres/Bris_de_Glace_avec_adversaire',(req,res,next)=>{
+//// Bris de Glace
+router.get('/home/sinistres/Dm/Bris_de_Glace_avec_adversaire',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/adversaire/formBrisGAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/adversaire/Dm/formBrisGAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
 })
 
-router.get('/home/sinistres/Incendie_avec_adversaire',(req,res,next)=>{
+////Incendie
+router.get('/home/sinistres/Dm/Incendie_avec_adversaire',(req,res,next)=>{
   if(req.cookies.infoUser){
-    res.render("user/form/adversaire/formIncendieAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
+    res.render("user/form/adversaire/Dm/formIncendieAd", {host:req.hostname,infoUser:req.cookies.infoUser, numero_police:req.params.numero_police})
    }else{
     res.redirect("/connexionUser")
    }
@@ -177,38 +220,67 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
         console.log(err.message)
       }
     }
+
+     //redirection cas sinstre avec  adversaire
     if ( type_sinistre =="SAA"){
           if( cat_sinistre =="DC"){
-             res.redirect("/users/home/sinistres/Dommage_corporels_avec_adversaire")
-          }else if(cat_sinistre=="DM" || cat_sinistre=="DM/DC"){
+
+             res.redirect("/users/home/sinistres/Dc/Dommage_corporels_avec_adversaire")
+
+          }else if(cat_sinistre=="DM"){
             if ( sinistre=="VOL"){
-               res.redirect("/users/home/sinistres/vol_avec_adversaire")
+               res.redirect("/users/home/sinistres/Dm/vol_avec_adversaire")
             }else if (sinistre=="BDG"){
-              res.redirect("/users/home/sinistres/Bris_de_Glace_avec_adversaire")
+              res.redirect("/users/home/sinistres/Dm/Bris_de_Glace_avec_adversaire")
 
             }else if (sinistre=="I"){
-              res.redirect("/users/home/sinistres/Incendie_avec_adversaire")
-
-            }else if (req.body.sinistre=="D"){
-              res.redirect("/users/home/sinistres/Dommage_avec_adversaire")
+              res.redirect("/users/home/sinistres/Dm/Incendie_avec_adversaire")
             }
+          }else if ( cat_sinistre =="DM/DC"){
+            
+            if ( sinistre=="VOL"){
+               res.redirect("/users/home/sinistres/DmDc/vol_avec_adversaire")
+            }else if (sinistre=="BDG"){
+              res.redirect("/users/home/sinistres/DmDc/Bris_de_Glace_avec_adversaire")
+
+            }else if (sinistre=="I"){
+              res.redirect("/users/home/sinistres/DmDc/Incendie_avec_adversaire")
+
+            }
+
           }
-    }else if(type_sinistre == "SSA"){
 
+          //redirection cas sinstre sans adversaire
+    }else if(type_sinistre == "SSA"){
+                //cas de la selection du dommage corporel
        if( cat_sinistre =="DC"){
-             res.redirect("/users/home/sinistres/Dommage_corporels")
-          }else if(cat_sinistre=="DM"|| cat_sinistre=="DM/DC"){
-            if ( sinistre=="VOL"){     
-        res.redirect("/users/home/sinistres/vol")
+                    res.redirect("/users/home/sinistres/Dc/Dommage_corporels")
+          }else if(cat_sinistre=="DM"){
+
+                if ( sinistre=="VOL"){     
+                 res.redirect("/users/home/sinistres/Dm/vol")
             }else if (sinistre=="BDG"){
-              res.redirect("/users/home/sinistres/Bris_de_Glace")
+              res.redirect("/users/home/sinistres/Dm/Bris_de_Glace")
 
             }else if (sinistre=="I"){
-              res.redirect("/users/home/sinistres/Incendie")
-
-            }else if (sinistre=="D"){
-              res.redirect("/users/home/sinistres/Dommage")
+              res.redirect("/users/home/sinistres/Dm/Incendie")
             }
+        
+          }else if( cat_sinistre =="DM/DC"){
+
+
+             if ( sinistre=="VOL"){     
+                 res.redirect("/users/home/sinistres/DmDc/vol")
+            }else if (sinistre=="BDG"){
+              res.redirect("/users/home/sinistres/DmDc/Bris_de_Glace")
+
+            }else if (sinistre=="I"){
+              res.redirect("/users/home/sinistres/DmDc/Incendie")
+
+            }
+          }else{
+             res.redirect("/users/home/addSinistre/:numero_police")
+
           }
 
 
@@ -220,7 +292,7 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
   }
   });
 
-///////////////////////////////////formulaire vol//////////////
+///////////////////////////////////formulaire vol sans adversaire//////////////
 router.post('/home/sinistres/send',(req,res,next)=>{
 
     let sql  = "INSERT INTO sinistrevoldetails SET ?";
