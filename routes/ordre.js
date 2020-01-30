@@ -26,12 +26,12 @@ router.get('/home', function(req, res, next) {
 if(req.cookies.infoAgent){
   con.connect(()=>{
     let temps = new Date()
-    let sql  = "select * from declaration_2 where niveau = ? and constat = ?"
-    con.query(sql,["ordre et expert","oui"],(err,result,fields)=>{
+    let sql  = "select * from sinistrevoldetails where niveau = ?"
+    con.query(sql,["O/E"],(err,result,fields)=>{
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
-res.render('ordre/sinistres/', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoAgent})
+res.render('ordre/sinistres/', { title: 'Express',blocks:body, sinistres:result, infoAgent:req.cookies.infoAgent})
 })
     })
     })
@@ -47,7 +47,7 @@ router.get('/sendConstat/:numpolice', function(req, res, next) {
 
 if(req.cookies.infoAgent){
   
-res.render('ordre/form', { title: 'Express',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
+res.render('ordre/form', { title: 'SIIN',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
 }
   //si la variable existe retourner la vue dashboard
 	else{

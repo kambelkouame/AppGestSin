@@ -26,6 +26,8 @@ router.get('/home', function(req, res, next) {
 
 if(req.cookies.infoAgent){
   con.connect(()=>{
+
+    console.log(req.cookies.infoAgent)
     let temps = new Date()
     let sql  = "select * from sinistrevoldetails where niveau = ?"
     con.query(sql,["O/E"],(err,result,fields)=>{
@@ -33,7 +35,7 @@ if(req.cookies.infoAgent){
     .then(res => res.json())
     .then(body => {
 
-res.render('agent/sinistres/index', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoAgent})
+res.render('agent/sinistres/index', { title: 'Express',blocks:body, sinistres:result, infoAgent:req.cookies.infoAgent})
 })
     })
     })
@@ -49,6 +51,7 @@ res.render('agent/sinistres/index', { title: 'Express',blocks:body, sinistres:re
 router.get('/sendResult/:numpolice', function(req, res, next) {
 
 if(req.cookies.infoAgent){
+
   
 res.render('agent/form', { title: 'Express',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
 }
@@ -64,6 +67,7 @@ router.get('/home/gestion', function(req, res, next) {
 
 if(req.cookies.infoAgent){
   con.connect(()=>{
+
     let temps = new Date()
     let sql  = "select * from declaration_2 where nom = ? and prenoms = ?"
     con.query(sql,[req.cookies.infoAgent.nom ,req.cookies.infoAgent.prenoms],(err,result,fields)=>{

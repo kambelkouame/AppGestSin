@@ -1,0 +1,515 @@
+<div class="content">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Sinistre N°:SNDE@4255dk_2019</h5>
+              </div>
+              <div class="card-body">
+                <form>
+                  <div class="row">
+                    <div class="col-md-5 pr-1">
+                      <div class="form-group">
+                        <label>Nom </label>
+                        <input type="text" class="form-control"  value="<%= sinistres.nom%>">
+                      </div>
+                    </div>
+                    <div class="col-md-3 px-1">
+                      <div class="form-group">
+                        <label>Prenoms</label>
+                        <input type="text" class="form-control" value="<%= sinistres.prenoms %>">
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Numero de Police</label>
+                        <input type="text" class="form-control" value="<%=sinistres.num_police%>">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Type de sinistre</label>
+                        <input type="text" class="form-control" placeholder="Company" value="Mike">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label></label>
+                        <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>commune</label>
+                        <input type="text" class="form-control" placeholder="City" value="Mike">
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                      <div class="form-group">
+                        <label>Adresse</label>
+                        <input type="text" class="form-control" placeholder="Country" value="Andrew">
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label>Besoin de Constat</label>
+                        <input type="number" class="form-control" placeholder="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Info sur le constrat de l'assuré</label>
+                        <textarea rows="4" cols="80" class="form-control" placeholder="Description" value="">Description...........</textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="image">
+                <img src="../assets/img/bg5.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
+                    <h5 class="title"> IBRAHIM KHALIL</h5>
+                  </a>
+                  <p class="description">
+                   
+                  </p>
+                </div>
+                
+              </div>
+              <hr>
+              
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="places-buttons">
+                  <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto text-center">
+                      <h4 class="card-title">
+                        Fiche du Gestionnaire
+                        <p class="category">Click to view notifications</p>
+                      </h4>
+                    </div>
+                  </div>
+                  
+                  
+                    <form  class="m-t-40">
+                               <section>
+                                <div class="row">
+                                     <div class="col-md-4 offset-md-8">
+                                        <label for="disabledTextInput">Numero de Police</label>
+                                            <div >
+                                                <input type="text" name="numero_police" id="disabledTextInput" class="form-control" value="" >
+                                            </div>
+                                    </div>
+                                </div>
+
+                                 <div class="row">
+                                     <div class="col-md-4 offset-md-8">
+                                        <label for="disabledTextInput">Votre Assurance</label>
+                                        <div >
+                                            <input name="Assurance" type="text" id="disabledTextInput" class="form-control" value="" >
+                                        </div>
+                                    </div>
+                                </div>
+                                  <br><br><br>
+                                <h3>SINISTRES</h3>
+                                <br>
+                                  <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div>
+                                                <label>Lieu du sinistre( avec Précision)</label>
+                                                <div class="input-group">
+                                                   <input name="Localisation" type="text" class="form-control" placeholder="ville,Commune,quatier">
+                                                   </div>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                    <div class="col-6">
+
+                                         <div class="form-group">
+                                            <div>
+                                                <label>Dommage Apparent</label>
+                                                <select class="select2 form-control custom-select">
+                                                    <optgroup>
+                                                        <option value="DC">Vitre brisé</option>
+                                                        <option value="DM">Parre Brise cassé</option>
+                                                        <option value="DM/DC">DOMMAGE MATERIEL ET CORPOREL</option>
+                                                    </optgroup> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                  </div>
+
+                                  <div class="row">
+                                            <div class="col-sm">
+                                                <label>Type de Vol</label>
+                                             <div class="input-group mb-3">
+                                                  <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                                                  </div>
+                                                  <select  name="type_vol" class="custom-select" id="inputGroupSelect01">
+                                                    <option value="Vol des accessoires">Vol des accessoires</option>
+                                                    <option value="Vol complet">Vol complet</option>
+                                                  </select>
+                                                </div>  
+                                                
+                                              
+                                            </div>
+
+
+                                  </div>
+                  
+
+                              <br><br>
+                             <h4> INFORMATION SUR LE TEMOINS </h4>              
+                             <br>
+
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="form-group">
+                                         <label >Nom et Prenom du temoin</label>
+                                    <div class="input-group">
+                                     <input name="nom_temoin" tynom_temoinpe="text" class="form-control">
+                                    </div>
+                                      
+                                         </div>
+                                    </div>
+                                   
+                                <div class="col-sm">
+
+                                    <div class="form-group">
+                                         
+                                        <label>Adresse du temoin  </label>
+                                             <div>
+                                                <div class="form-group">
+                                                     <input name="adresse_temoin" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                         </div>
+                                </div>
+                                <div class="col-sm">
+                                  <div class="form-group">  
+                                        <label>contact du temoin </label>
+                                                    <div>
+                                                <div class="form-group">
+                                                      <input type="text" name="telephone_temoin" class="form-control phone-inputmask" id="phone-mask" placeholder="Entrer le contact ">
+                                                </div>
+                                            </div>
+                                         </div>
+                                </div>
+                             </div>
+
+                             <div class="row">
+                                  <div class="col-sm">
+                                    <label>Importer les photos du sinistre </label>
+                                            <div class="custom-file">
+                                                <input name="photo_vol" type="file" class="custom-file-input" id="validatedCustomFile">
+                                                <label class="custom-file-label" for="validatedCustomFile"></label>
+                                            </div>
+
+                                  </div>
+                                        
+                                </div>
+                                </section>
+                                <br><br>
+
+                                <h3>INFORMATIONS SUR L'ASSURE</h3>
+                                <section> 
+                            <br>
+
+                    <div class="row">
+                      <div class="col-6">
+                          <div class="form-group">
+                              <div>
+                                  <label>Nom de famille de l'assuré</label>
+                                   <div class="input-group">
+                                           <input name="nom" value="" type="text" class="form-control">
+                                  </div>
+                              </div>
+                          </div>
+                          
+                        
+                      </div>
+                      <div class="col-6">
+
+                           <div class="form-group">
+                              <div>
+                                  <label>Prenom</label>
+                                    <div class="input-group">
+                                           <input name="prenom" value="" type="text" class="form-control">
+                                      </div>
+                              </div>
+                          </div>
+                      </div>
+                     
+                    </div>
+           
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                         <label >Numero de telephone Usuel</label>
+                         <div class="input-group">
+                              <input name="numero" type="number" class="form-control">
+                          </div>
+                      
+                         </div>
+                    </div>
+                    
+                  
+                
+                <div class="col-sm">
+
+                    <div class="form-group">
+                         
+                        <label>Email Usuel  </label>
+                                    <div>
+                                  <div class="input-group">
+                                     <input name="email" value="" type="email" class="form-control">
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+                <div class="col-sm">
+                  <div class="form-group">  
+                        <label>Domicile </label>
+                                    <div>
+                                <div class="input-group">
+                                     <input name="domicile" type="text" class="form-control">
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+             </div>
+
+             <h4>Information sur le vehicule</h4>
+
+              <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                 
+                                <label>Marque du vehicule</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="marque_vehicule" type="text" class="form-control">
+                                            </div>
+                                 </div>
+                            </div>
+                        </div>
+                            
+                          
+                        
+                    <div class="col-sm">
+
+                            <div class="form-group">
+                                 
+                                <label>Model du vehicule</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="Model_vehicule" type="text" class="form-control">
+                                            </div>
+                                 </div>
+                        </div>
+                    </div>
+                        <div class="col-sm">
+
+                              <label>Categorie du permis</label>
+                            <div>
+                                 <div class="input-group">
+                                             <input name="categorie_permis" type="text" class="form-control">
+                                            </div>
+                             </div>
+                         
+                        </div>
+                     </div>
+         
+
+                     <div class="row">
+                          <div class="col-sm">
+                            <label>Lieu d'obtention du permis</label>
+                                    <div class="input-group">
+                                      <input name="autoecole" type="text" class="form-control">
+                                      </div>
+                          </div>
+
+                            <div class="col-sm">
+                            <label>Date de Péremption du permis</label>
+                            <div class="input-group">
+                              <input name="fin_permis" type="text" class="form-control">
+                              </div>
+                          </div>
+                                
+                    </div>
+                                </section>
+
+
+                                <h3>Infos sur le Contrat</h3>
+                                <section>
+                                    
+                <br><br><br>
+
+              <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <div>
+                            <label>date de Debut du contrat</label>
+                             <div class="input-group">
+                                     <input name="date_debut_cont" type="text" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
+                    
+                  
+                </div>
+                <div class="col-6">
+
+                     <div class="form-group">
+                        <div>
+                            <label>Date Fin du contrat</label>
+                              <div class="input-group">
+                                     <input name="date_fin_cont" type="text" class="form-control" >
+                                </div>
+                        </div>
+                    </div>
+                </div>
+               
+              </div>
+           
+
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-group">
+                         <label >Souscripteur</label>
+                         <div class="input-group">
+                              <input name="souscripteur" type="text" class="form-control">
+                          </div>
+                      
+                         </div>
+                    </div>
+                    
+                  
+                
+                <div class="col-sm">
+
+                    <div class="form-group">
+                         
+                        <label>Type de Garantie </label>
+                                    <div>
+                                  <div class="input-group">
+                                     <input name="type_Garantie" type="text" class="form-control">
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+                <div class="col-sm">
+                  <div class="form-group">  
+                        <label>Immatricumation</label>
+                                    <div>
+                                <div class="input-group">
+                                     <input name="immatriculation" type="text" class="form-control">
+                                    </div>
+                            </div>
+                         </div>
+                </div>
+             </div>
+
+             <h4>Information sur le vehicule</h4>
+
+              <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                 
+                                <label>Genre du vehicule</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="genre_vehicule" type="text" class="form-control" >
+                                            </div>
+                                 </div>
+                            </div>
+                        </div>
+                            
+                          
+                        
+                    <div class="col-sm">
+
+                            <div class="form-group">
+                                 
+                                <label>Ville</label>
+                                            <div>
+                                          <div class="input-group">
+                                             <input name="ville" type="text" class="form-control" >
+                                            </div>
+                                 </div>
+                        </div>
+                    </div>
+                        <div class="col-sm">
+
+                              <label>energie</label>
+                            <div>
+                                 <div class="input-group">
+                                      <input name="energie" type="text" class="form-control" >
+                                    </div>
+                             </div>
+                         
+                        </div>
+                     </div>
+         
+
+                                </section>
+                                <h3>Finir</h3>
+                                <section>
+                                    <input id="acceptTerms" name="acceptTerms" type="checkbox" >
+                                    <label for="acceptTerms">j'acceptes les conditions d'utilisations de la plateforme</label>
+                                    <br><br>
+                                    <button  class="btn btn-outline-primary" onclick="nowuiDashboard.showNotification('bottom','right')" >Valider</button>
+
+                                </section>
+
+                            
+                        </form>
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

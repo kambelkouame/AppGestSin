@@ -53,7 +53,7 @@
     <div class="container">
   <div class="py-5 text-center">
     <img class="d-block mx-auto mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h2>Constat de police</h2>
+    <h2>gestion du sinistre</h2>
   </div>
 
   <div class="row p-4">
@@ -71,29 +71,33 @@
     </div>
     
     <div class="col-md-8 order-md-1">
-      <form method="POST" action="send">
-      <h4 class="mb-3">Informations prerequises</h4>
       <form method="post" action="send">
+        <h4 class="mb-3">Rapport de police</h4>
         <div class="row">
           <div class="col-md-5 mb-3">
             <input type="hidden" name="nom" value="<%= infoAgent.nom %>">
             <input type="hidden" name="prenom" value="<%= infoAgent.prenoms %>">
              <input type="hidden" name="num_police" value="<%= numero_police %>">
-           <label for="firstName">Lieu</label><br>
-              <input type="text" name="constat" class="form-control" required>
+           <label for="firstName">Avis du policier</label><br>
+              <textarea class="form-control" id="exampleFormControlTextarea1" name="avisExpert" rows="3"></textarea>
           </div>
          
           <div class="col-md-5 mb-3">
-            <label for="firstName">Immatriculation</label><br>
-            <input type="text" name="constat" class="form-control" required>
+            <label for="firstName">Lieu du sinistre</label><br>
+            <input type="text" name="" class="form-control" required>
+            <label for="firstName">Immatriculation du vehicule</label><br>
+            <input type="text" name="" class="form-control" required>
+
           </div>
-          <div class="col-md-5 mb-3 custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
-           <label class="custom-file-label" for="customFile">Importer le contrat</label>
+          <div class="col-md-5 mb-3">
+            <input type="text" name="localication" class="form-control" placeholder="Lieu du sinistre" required>
           </div>
-           <div class="col-md-5 mb-3">
-            <input type="text" name="localication" class="form-control" placeholder="Localisation" required>
-          </div>
+
+
+
+          <h4 class="mb-3">Rapport de police</h4><br>
+          <hr>
+    
            <div class="col-md-5 mb-3">
           <label for="exampleFormControlTextarea1">Donner votre avis sur le sinistre</label>
           <textarea class="form-control" id="exampleFormControlTextarea1" name="avis" rows="3"></textarea>
@@ -104,11 +108,13 @@
       </form>
     </div>
   </div>
- <% include ../anim %>
+ 
 </div>
 <script src="/javascripts/angular.js" type="text/javascript"></script>
 <script src="/javascripts/main.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
         <script src="form-validation.js"></script></body>
+
+        <% include ../anim %>
 </html>

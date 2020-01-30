@@ -26,11 +26,11 @@ fetch('http://localhost:5001/chain')
 
 
 router.get('/connexionUser', function(req, res, next) {
-res.render('connexionUser', { title: 'Express'})
+res.render('connexionUser', { title: 'SIIN'})
 });
 
 router.get('/connexionAgent', function(req, res, next) {
-res.render('connexionAgent', { title: 'Express'})
+res.render('connexionAgent', { title: 'SIIN'})
 });
 
 router.get('/deconnexion', function(req, res, next) {

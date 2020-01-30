@@ -603,17 +603,17 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
     // console.log("error ocurred",error);
    
   }else{
-    // console.log('The solution is: ', results);
+     //console.log('The solution is: ', results);
     if(results.length >0){
       if(results[0].password == password){
 
-         console.log('faux')
+         console.log('zooooo')
         //creation de la variable cookie
         
-
-        if(results[0].fonction== "gestionnaire"){
+         
+        if(results[0].fonction=="gestionnaire"){
           res.cookie("infoAgent", results[0])
-          console.log(infoAgent)
+          console.log(results[0])
           res.redirect('/agent/home')
         } 
         else if (results[0].fonction=="policier"){

@@ -1,27 +1,47 @@
+
+
 <div class="row p-5">
-<div class="col-12 p-2 border border-light text-dark">
-    <div class="row">
-        <div class="col-8 d-flex align-items-center">
-            Liste des sinistres
-        </div>
-    </div>
-</div>
 
 <% sinistres.forEach(sinistre => { %>
 <div class="col-3 d-flex">
-    <div class="col-12 mt-3 p-3 bg-light">
-        <h6 class="font-weight-bold"><%= sinistre.type_sinistre %></h6>
-        <small>n° police : <%= sinistre.num_police %></small><br>
-        <small>date : <%= sinistre.date_declaration %></small><br>
-        <small>nb morts : <%= sinistre.nb_mort %></small><br>
-        <small>nb blesses : <%= sinistre.nb_blesse %></small><br>
-        <small>status : <%= sinistre.status %></small><br>
-        <% if(sinistre.niveau == "ordre et expert"){ %>
-        <a href="sendConstat/<%= sinistre.num_police %>">envoyer constat</i></a>
-        <% } %>
+    <div class="col-12 mt-3 p-3">
+
+         <div class="card card-chart col-12 mt-3 p-3">
+              <div class="card-header">
+                <h4 class="card-title"><%= sinistre.type_vol %></h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                    <i class="now-ui-icons loader_gear"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Details</a>
+                    <a class="dropdown-item" href="#">Gerer le sinistre</a>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <small>n° police : <%= sinistre.numero_police %></small><br>
+                <small>date : <%= sinistre.nom %></small><br>
+                <small>nb morts : <%= sinistre.prenom %></small><br>
+                <small>nb blesses : <%= sinistre.email %></small><br>
+                <small>status : <%= sinistre.status %></small><br>
+                <small>assuré : <%= sinistre.nom %> <%= sinistre.prenoms %></small><br>
+               
+               
+              </div>
+              <div class="card-footer">
+             <a href="home/gestion">gerer</a>
+                
+              </div>
+            </div>
+        
 
     </div>
 </div>
 
 <% }) %>
 </div>
+
+
+        
