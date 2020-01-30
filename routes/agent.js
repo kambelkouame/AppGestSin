@@ -34,11 +34,18 @@ if(req.cookies.infoAgent){
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
+     
+      let sql  = "select * from sinistreidetails where niveau = ?"
+      con.query(sql,["O/E"],(err,resulti,fields)=>{
 
-res.render('agent/sinistres/index', { title: 'Express',blocks:body, sinistres:result, infoAgent:req.cookies.infoAgent})
+        let sql  = "select * from sinistrebdgdetails where niveau = ?"
+      con.query(sql,["O/E"],(err,resultbdg,fields)=>{
+res.render('agent/sinistres/index', { title: 'Express',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
 })
     })
     })
+    })
+  })
   //si la variable existe retourner la vue dashboard
       
 }else{

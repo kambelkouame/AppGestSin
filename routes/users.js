@@ -291,9 +291,9 @@ router.post('/home/addSinistre/send',(req,res,next)=>{
     
   }
   });
-
-///////////////////////////////////formulaire vol sans adversaire//////////////
-router.post('/home/sinistres/send',(req,res,next)=>{
+//////////////////////DOMMAGE MATERIEL
+///////////////////////////////////VOL
+router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
 
     let sql  = "INSERT INTO sinistrevoldetails SET ?";
     
@@ -402,47 +402,234 @@ router.post('/home/sinistres/send',(req,res,next)=>{
               })
           })
       
-      /*
+        
+  });
 
 
-      donnee1.garanties.forEach(element=>{
+///////////////////////BRIS DE GLACE
+  router.post('/home/sinistres/Dm/dmbsend',(req,res,next)=>{
+
+    let sql  = "INSERT INTO sinistrebdgdetails SET ?";
+    
+  
+    const Localisation=req.body.Localisation;
+    const type_vol=req.body.type_vol;
+    const nom_temoin=req.body.nom_temoin;
+    const telephone_temoin=req.body.telephone_temoin;
+    const adresse_temoin=req.body.adresse_temoin;
+    const photo_vol=req.body.photo_vol;
+    const nom=req.body.nom;
+    const prenom=req.body.prenom;
+    const numero=req.body.numero;
+    const email=req.body.email;
+    const domicile=req.body.domicile;      
+    const marque_vehicule=req.body.marque_vehicule;
+    const genre_vehicule=req.body.genre_vehicule;
+    const categorie_permis=req.body.categorie_permis;
+    const Model_vehicule=req.body.Model_vehicule;
+    const ville=req.body.ville;
+    const energie=req.body.energie;
+    const immatriculation=req.body.immatriculation;
+    const date_debut_cont=req.body.date_debut_cont;
+    const date_fin_cont=req.body.date_fin_cont;
+    const souscripteur=req.body.souscripteur;
+    const type_Garantie=req.body.type_Garantie;
+    const Assurance=req.body.Assurance;
+   
+    let sinistrevoldetails={
+
+        numero_police:num_police,
+        Localisation:Localisation,
+        type_vol:type_vol,
+        nom_temoin:nom_temoin,
+        adresse_temoin:adresse_temoin,
+        telephone_temoin:telephone_temoin,
+        photo_vol:photo_vol,
+        nom:nom,
+        prenom:prenom,
+        numero:numero,
+        email:email,
+        domicile:domicile,
+        marque_vehicule:marque_vehicule,
+        genre_vehicule:genre_vehicule,
+        categorie_permis:categorie_permis,
+        Model_vehicule:Model_vehicule,
+        ville:ville,
+        energie:energie,
+        immatriculation:immatriculation,
+        date_debut_cont:date_debut_cont,
+        date_fin_cont:date_fin_cont,
+        souscripteur:souscripteur,
+        type_Garantie:type_Garantie,
+        Assurance:Assurance,
+        niveau:"O/E"
+
+    }
+  console.log(sinistrevoldetails)
+  console.log(num_police)
+
+  let connexion = mysql.createConnection({
+      host : db.hostname,
+      user : db.username,
+      password : db.password,
+      database : db.dbname,
+      port : db.port,
+    })
+
+  connexion.query(sql,sinistrevoldetails) ,( err,result)=>{
+      if(err){
+        console.log(err.message)
+      }
+    }
+
+
+     fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192?page='+req.params.page)
+    .then(result => result.json())
+    .then(body => {
+
+          let result=[]
+          body.data.forEach(b=>{
+            if(b.numero_police==num_police) result=b
+               })
+
+          console.log(result.avenant_id)
+          var ID = result.avenant_id
+          var host='https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/details_contrat/'
+          var url = host+ID
+           fetch(url)
+            .then((response) => response.json())
+            .then(info =>{
+              info.garanties.forEach(element=>{
                 console.log(element)
-                if(element==="Vol,Vol accessoires,Vol armé"){
+                if(element.libelle==="Vol,Vol accessoires,Vol armé"){
                   
-                  console.log("garantie aquise")
-                  res.redirect("/users/home/contrats/1")
+                  console.log("garantie acquise")
+                  res.redirect("/users/home/contrats/1")} 
+                  })
+             
 
-                } 
-
-               
-             }
-              )
-              if (donnee1.garanties!=="Vol,Vol accessoires,Vol armé"){
+              if (info.garanties.libelle !=="Vol,Vol accessoires,Vol armé"){
                   console.log("garantie non acquise")
                   
                  res.redirect("/users/home/sinistre/Garantie_non_acquise/")
                 } 
-                 /*
-            
-              for(var i=0; i<=contrat_det.length; i++) {
-                  console.log(contrat_det)     
-                     if( contrat_det[i] !=="Vol,Vol accessoires,Vol armé" || contrat_det[i] !=="Tous Risques") {
-                        res.redirect("/users/home/sinistres/vol")
-                        console.log(contrat_det[i])
-                      }else{
-               
-                       console.log("garantie non acquise")
-                      console.log(contrat_det[i])
-                       res.redirect("/users/home/sinistre/Garantie_non_acquise/")
-                      }
-                    }
-              */
+                 
+              })
+          })
+});
 
-     
+
+///////////////////////BRIS DE GLACE
+  router.post('/home/sinistres/Dm/dmIsend',(req,res,next)=>{
+
+    let sql  = "INSERT INTO sinistreIdetails SET ?";
     
-  });
+  
+    const Localisation=req.body.Localisation;
+    const type_vol=req.body.type_vol;
+    const nom_temoin=req.body.nom_temoin;
+    const telephone_temoin=req.body.telephone_temoin;
+    const adresse_temoin=req.body.adresse_temoin;
+    const photo_vol=req.body.photo_vol;
+    const nom=req.body.nom;
+    const prenom=req.body.prenom;
+    const numero=req.body.numero;
+    const email=req.body.email;
+    const domicile=req.body.domicile;      
+    const marque_vehicule=req.body.marque_vehicule;
+    const genre_vehicule=req.body.genre_vehicule;
+    const categorie_permis=req.body.categorie_permis;
+    const Model_vehicule=req.body.Model_vehicule;
+    const ville=req.body.ville;
+    const energie=req.body.energie;
+    const immatriculation=req.body.immatriculation;
+    const date_debut_cont=req.body.date_debut_cont;
+    const date_fin_cont=req.body.date_fin_cont;
+    const souscripteur=req.body.souscripteur;
+    const type_Garantie=req.body.type_Garantie;
+    const Assurance=req.body.Assurance;
+   
+    let sinistrevoldetails={
+
+        numero_police:num_police,
+        Localisation:Localisation,
+        type_vol:type_vol,
+        nom_temoin:nom_temoin,
+        adresse_temoin:adresse_temoin,
+        telephone_temoin:telephone_temoin,
+        photo_vol:photo_vol,
+        nom:nom,
+        prenom:prenom,
+        numero:numero,
+        email:email,
+        domicile:domicile,
+        marque_vehicule:marque_vehicule,
+        genre_vehicule:genre_vehicule,
+        categorie_permis:categorie_permis,
+        Model_vehicule:Model_vehicule,
+        ville:ville,
+        energie:energie,
+        immatriculation:immatriculation,
+        date_debut_cont:date_debut_cont,
+        date_fin_cont:date_fin_cont,
+        souscripteur:souscripteur,
+        type_Garantie:type_Garantie,
+        Assurance:Assurance,
+        niveau:"O/E"
+
+    }
+  console.log(sinistrevoldetails)
+  console.log(num_police)
+
+  let connexion = mysql.createConnection({
+      host : db.hostname,
+      user : db.username,
+      password : db.password,
+      database : db.dbname,
+      port : db.port,
+    })
+
+  connexion.query(sql,sinistrevoldetails) ,( err,result)=>{
+      if(err){
+        console.log(err.message)
+      }
+    }
 
 
+     fetch('https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/voir_contrat/192?page='+req.params.page)
+    .then(result => result.json())
+    .then(body => {
+
+          let result=[]
+          body.data.forEach(b=>{
+            if(b.numero_police==num_police) result=b
+               })
+
+          console.log(result.avenant_id)
+          var ID = result.avenant_id
+          var host='https://api-auto-siin.eu-gb.mybluemix.net/auto-siin/details_contrat/'
+          var url = host+ID
+           fetch(url)
+            .then((response) => response.json())
+            .then(info =>{
+              info.garanties.forEach(element=>{
+                console.log(element)
+                if(element.libelle==="Vol,Vol accessoires,Vol armé"){
+                  
+                  console.log("garantie acquise")
+                  res.redirect("/users/home/contrats/1")} 
+                  })
+             
+
+              if (info.garanties.libelle !=="Vol,Vol accessoires,Vol armé"){
+                  console.log("garantie non acquise")
+                  
+                 res.redirect("/users/home/sinistre/Garantie_non_acquise/")
+                } 
+                 
+              })
+          })
+});
 
 /*
 ///////////////////////////////////formulaire INCENDIE//////////////
