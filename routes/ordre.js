@@ -21,6 +21,21 @@ const con = mysql.createConnection({
 
 })
 
+
+
+
+
+
+
+router.get('/home/constat',(req,res,next)=>{
+  if(req.cookies.infoAgent){
+    res.render("ordre/sinistres/constat", {host:req.hostname,infoAgent:req.cookies.infoAgent, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionAgent")
+   }
+});
+
+
 router.get('/home', function(req, res, next) {
 
 if(req.cookies.infoAgent){

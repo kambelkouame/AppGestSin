@@ -14,33 +14,85 @@ var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
 
-router.get('/connexionUser', function(req, res, next) {
-res.render('connexionUser', { title: 'Express'})
-});
 
-router.get('/connexionAgent', function(req, res, next) {
-res.render('connexionAgent', { title: 'Express'})
-});
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'sinistre'
 
-router.get('/deconnexion', function(req, res, next) {
-	//supprimer la variable cookie user
-	res.clearCookie("infoAgent")
-	//retourne la vue connexion
-	res.redirect("/connexionAgent")
-});
+})
 
+router.get('/home', function(req, res, next) {
 
-router.get('/second', function(req, res, next) {
+if(req.cookies.infoAgent){
+  con.connect(()=>{
 
-//verification de l'existence de la variable cookie 'user'
-if(req.cookies.agent){
-	//si la variable existe retourner la vue dashboard
-res.render('second/home', { title: 'Express'})
+    console.log(req.cookies.infoAgent)
+    let temps = new Date()
+    let sql  = "select * from sinistrevoldetails where niveau = ? and constat =?"
+    con.query(sql,["O/E","oui"],(err,result,fields)=>{
+      fetch('http://localhost:5001/chain')
+    .then(res => res.json())
+    .then(body => {
+     
+      let sql  = "select * from sinistreidetails where niveau = ? and constat =?"
+      con.query(sql,["O/E","oui"],(err,resulti,fields)=>{
+
+        let sql  = "select * from sinistrebdgdetails where niveau = ? and constat =?"
+      con.query(sql,["O/E","oui"],(err,resultbdg,fields)=>{
+res.render('second/sinistres/', { title: 'Express',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
+})
+    })
+    })
+    })
+  })
+  //si la variable existe retourner la vue dashboard
+      
 }else{
-	//sinon retourner connexion
-	res.redirect("/connexionAgent")
+  //sinon retourner connexion
+  res.redirect("/connexionAgent")
 }
 });
+
+
+router.get('/sendConstat/:numpolice', function(req, res, next) {
+
+if(req.cookies.infoAgent){
+  
+res.render('second/form', { title: 'SIIN',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
+}
+  //si la variable existe retourner la vue dashboard
+	else{
+  //sinon retourner connexion
+  res.redirect("/connexionAgent")
+}
+
+});
+
+
+
+
+router.post('/sendConstat/send',(req,res,next)=>{
+  console.log(req.body.constat)
+    con.connect(()=>{
+    let temps = new Date()
+    let sql  = "insert into avis_police(nom, prenoms, num_police, immatriculation, localisation, avis, date_envoi) values (?,?,?,?,?,?,?)"
+    con.query(sql,[req.body.nom,req.body.prenom,req.body.num_police,req.body.immatriculation,req.body.localisation,req.body.avis,temps],(err,result,fields)=>{
+      res.redirect("/second/home")
+    })
+    })
+    
+   
+})
+
+router.get('/deconnexion', function(req, res, next) {
+  //supprimer la variable cookie user
+  res.clearCookie("infoAgent")
+  //retourne la vue connexion
+  res.redirect("/connexionAgent")
+});
+
 
 
 

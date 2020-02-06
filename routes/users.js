@@ -890,7 +890,7 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
          else if (results[0].fonction=="expert"){
          
 
-         res.redirect('/users/second/home')
+         res.redirect('/second/home')
         }
         else{
           res.redirect('/connexionAgent')
