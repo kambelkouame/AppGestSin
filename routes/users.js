@@ -320,6 +320,7 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
     const souscripteur=req.body.souscripteur;
     const type_Garantie=req.body.type_Garantie;
     const Assurance=req.body.Assurance;
+     const constat=req.body.constat;
    
     let sinistrevoldetails={
 
@@ -347,7 +348,8 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
         souscripteur:souscripteur,
         type_Garantie:type_Garantie,
         Assurance:Assurance,
-        niveau:"O/E"
+        niveau:"O/E",
+        constat:constat
 
     }
   console.log(sinistrevoldetails)
@@ -407,7 +409,8 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
 
 
 ///////////////////////BRIS DE GLACE
-  router.post('/home/sinistres/Dm/dmbsend',(req,res,next)=>{
+
+ router.post('/home/sinistres/Dm/dmbsend',(req,res,next)=>{
 
     let sql  = "INSERT INTO sinistrebdgdetails SET ?";
     
@@ -435,6 +438,7 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
     const souscripteur=req.body.souscripteur;
     const type_Garantie=req.body.type_Garantie;
     const Assurance=req.body.Assurance;
+    const constat=req.body.constat;
    
     let sinistrevoldetails={
 
@@ -462,7 +466,8 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
         souscripteur:souscripteur,
         type_Garantie:type_Garantie,
         Assurance:Assurance,
-        niveau:"O/E"
+        niveau:"O/E",
+        constat:constat
 
     }
   console.log(sinistrevoldetails)
@@ -517,9 +522,10 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
               })
           })
 });
+ 
 
 
-///////////////////////BRIS DE GLACE
+///////////////////////Incendie
   router.post('/home/sinistres/Dm/dmIsend',(req,res,next)=>{
 
     let sql  = "INSERT INTO sinistreIdetails SET ?";
@@ -548,6 +554,7 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
     const souscripteur=req.body.souscripteur;
     const type_Garantie=req.body.type_Garantie;
     const Assurance=req.body.Assurance;
+    const constat=req.body.constat;
    
     let sinistrevoldetails={
 
@@ -575,7 +582,8 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
         souscripteur:souscripteur,
         type_Garantie:type_Garantie,
         Assurance:Assurance,
-        niveau:"O/E"
+        niveau:"O/E",
+        constat:constat
 
     }
   console.log(sinistrevoldetails)

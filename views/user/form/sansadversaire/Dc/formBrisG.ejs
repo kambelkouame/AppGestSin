@@ -56,7 +56,7 @@
         </div>
     </div>
   <div class="wrapper ">
-     <% include ../../contrats/menu %>
+     <% include ../../../contrats/menu %>
     <div class="main-panel" id="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
@@ -133,7 +133,7 @@
                     
                     
 
-   <form  method="post" action="send" class="m-t-40">
+   <form  method="post" action="dmisend" class="m-t-40">
 
 
 
@@ -282,6 +282,19 @@
                      </div>
 
                      <div class="row">
+
+
+                        <div class="col-sm">
+                        <label>Besoin de constat ?</label>
+                     <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                          </div>
+                          <select  name="constat" class="custom-select" id="inputGroupSelect01">
+                            <option value="oui">oui</option>
+                            <option value="non">non</option>
+                          </select>
+                        </div>
                           <div class="col-sm">
                             <label>Importer les photos du sinistre </label>
                                     <div class="custom-file">
@@ -294,7 +307,7 @@
                         </div>
                         </section>
                         <br><br>
-
+                     </div>
                         <h3>INFORMATIONS SUR L'ASSURE</h3>
                         <section> 
                     <br>

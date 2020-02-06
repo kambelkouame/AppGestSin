@@ -25,23 +25,34 @@ router.get('/home', function(req, res, next) {
 
 if(req.cookies.infoAgent){
   con.connect(()=>{
+
+    console.log(req.cookies.infoAgent)
     let temps = new Date()
-    let sql  = "select * from sinistrevoldetails where niveau = ?"
-    con.query(sql,["O/E"],(err,result,fields)=>{
+    let sql  = "select * from sinistrevoldetails where niveau = ? and constat =?"
+    con.query(sql,["O/E","oui"],(err,result,fields)=>{
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
-res.render('ordre/sinistres/', { title: 'Express',blocks:body, sinistres:result, infoAgent:req.cookies.infoAgent})
+     
+      let sql  = "select * from sinistreidetails where niveau = ? and constat =?"
+      con.query(sql,["O/E","oui"],(err,resulti,fields)=>{
+
+        let sql  = "select * from sinistrebdgdetails where niveau = ? and constat =?"
+      con.query(sql,["O/E","oui"],(err,resultbdg,fields)=>{
+res.render('ordre/sinistres/', { title: 'Express',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
 })
     })
     })
+    })
+  })
   //si la variable existe retourner la vue dashboard
       
 }else{
   //sinon retourner connexion
-  res.redirect("/connexionUser")
+  res.redirect("/connexionAgent")
 }
 });
+
 
 router.get('/sendConstat/:numpolice', function(req, res, next) {
 
