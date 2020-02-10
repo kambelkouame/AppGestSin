@@ -127,7 +127,7 @@ router.get('/sendResult/:numpolice', function(req, res, next) {
 if(req.cookies.infoAgent){
 
   
-res.render('agent/form', { title: 'Express',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
+res.render('agent/form', { title: 'SIIN',numero_police:req.params.numpolice,infoAgent:req.cookies.infoAgent})
 }
   //si la variable existe retourner la vue dashboard
   else{
@@ -148,7 +148,7 @@ if(req.cookies.infoAgent){
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
-res.render('agent/form/gerer_sinistre', { title: 'Express',blocks:body, sinistres:result, data:req.cookies.infoAgent})
+res.render('agent/form/gerer_sinistre', { title: 'SIIN',blocks:body, sinistres:result, data:req.cookies.infoAgent})
 })
     })
     })

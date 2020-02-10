@@ -23,6 +23,14 @@ const con = mysql.createConnection({
 
 })
 
+router.get('/home/expertise',(req,res,next)=>{
+  if(req.cookies.infoAgent){
+    res.render("second/sinistres/expertise", {host:req.hostname,infoAgent:req.cookies.infoAgent, numero_police:req.params.numero_police})
+   }else{
+    res.redirect("/connexionAgent")
+   }
+});
+
 router.get('/home', function(req, res, next) {
 
 if(req.cookies.infoAgent){
@@ -41,7 +49,7 @@ if(req.cookies.infoAgent){
 
         let sql  = "select * from sinistrebdgdetails where niveau = ? and constat =?"
       con.query(sql,["O/E","oui"],(err,resultbdg,fields)=>{
-res.render('second/sinistres/', { title: 'Express',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
+res.render('second/sinistres/', { title: 'SIIN',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
 })
     })
     })
@@ -73,18 +81,7 @@ res.render('second/form', { title: 'SIIN',numero_police:req.params.numpolice,inf
 
 
 
-router.post('/sendConstat/send',(req,res,next)=>{
-  console.log(req.body.constat)
-    con.connect(()=>{
-    let temps = new Date()
-    let sql  = "insert into avis_police(nom, prenoms, num_police, immatriculation, localisation, avis, date_envoi) values (?,?,?,?,?,?,?)"
-    con.query(sql,[req.body.nom,req.body.prenom,req.body.num_police,req.body.immatriculation,req.body.localisation,req.body.avis,temps],(err,result,fields)=>{
-      res.redirect("/second/home")
-    })
-    })
-    
-   
-})
+
 
 router.get('/deconnexion', function(req, res, next) {
   //supprimer la variable cookie user
