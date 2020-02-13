@@ -133,7 +133,7 @@
                     <div class="col-md-6 ml-auto mr-auto text-center">
                       <h4 class="card-title">
                         CONSTAT DE POLICE
-                        <p class="category">cette section est reservé a l'EXPERtISE</p>
+                        <p class="category">cette section est reservé au constat </p>
                       </h4>
                     </div>
                   </div>
@@ -152,14 +152,14 @@
                         </div>
                          </div>   --->
                          <div class="row p-5">
-                        <div class="row">
+                        
                             <form action="send" method="POST" enctype="multipart/form-data">
-                                <div class=" col-sm">
+                                <div class=" col-s6">
                              
-                         <h1>Veillez importer l' expertise</h1> <%= typeof msg != 'undefined' ? msg : '' %>
+                         <h1>Veillez importer le constat</h1> <%= typeof msg != 'undefined' ? msg : '' %>
                               <div class="file-field input-field">
                                 <div class="btn grey">
-                                  <span>Expertise</span>
+                                  <span>Constat</span>
                                   <input name="myImage" type="file">
                                 </div>
                                 
@@ -168,7 +168,7 @@
                             <img src="<%= typeof file != 'undefined' ? file : '' %>" class="responsive-img">
                           </div>
 
-                  <!-------       
+                          <div class="col-s6">
                             <div class="col-sm">
                                 <label>culpabilité</label>
                              <div class="input-group mb-3">
@@ -181,21 +181,10 @@
                                     <option value="INOCENT">Inocent</option>
                                   </select>
                                 </div>  
-                             
+                              <button type="submit" class="btn btn-outline-primary">Envoyer</button>
                            
                             <br>
                           </div>
-                   ----->
-                           <div class="col-sm">  
-                                <label>Estimation des degats</label>
-                                            <div>
-                                        <div class="form-group">
-                                              <input type="number" name="estimation" class="form-control phone-inputmask" id="phone-mask" placeholder="Entrer estimation ">
-                                        </div>
-                                    </div>
-                                 </div>
-
-                                  <button type="submit" class="btn btn-outline-primary">Envoyer</button>
                           </div>
                    
                          

@@ -36,6 +36,19 @@ CREATE TABLE `constat` (
     `nomAgent` VARCHAR(255),w
     `prenomAgent` VARCHAR(255),
     `numero_police` VARCHAR(255),
+     `estimation` VARCHAR(255),
+    `date_declaration` DATE
+    
+
+     )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `expertise` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `uploaded_image` VARCHAR(255),
+    `nomAgent` VARCHAR(255),w
+    `prenomAgent` VARCHAR(255),
+    `numero_police` VARCHAR(255),
+    `estimation` int,
     `date_declaration` DATE
     
 
