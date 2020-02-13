@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html ng-app="meta">
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta name="color-theme" content="black">
+    <%- include ../head -%>
+    <link rel="stylesheet" href="/stylesheet/accueil.css">
+</head>
+<style>
+
+</style>
+
+<body class="grey lighten-4" ng-controller="metaCtrl">
+    <div class="row">
+        <%- include options -%>
+        <%- include plan -%>
+        <%- include information -%>
+    </div>
+
+    <%- include modal -%>
+
+
+    <div id="contextMenu" class="white">
+        <ul class="list-group list-group-vertical">
+            <button class="list-group-item btn-light" data-toggle="modal"
+                data-target="#newClient">nouveau carefour</button>
+                <button class="list-group-item btn-light" data-toggle="modal"
+                data-target="#newFournisseur">nouvelle
+                route droite</button>
+            <button class="list-group-item btn-light" data-toggle="modal"
+                data-target="#newFournisseur">nouvelle
+                Voiture</button>
+                <button class="list-group-item btn-light" data-toggle="modal"
+                data-target="#newFournisseur">nouvelle
+                fleche 45*</button>
+                <button class="list-group-item btn-light" data-toggle="modal"
+                data-target="#newFournisseur">nouvelle
+                fleche 90*</button>
+                <button class="list-group-item btn-light" data-toggle="modal"
+                data-target="#newFournisseur">nouvelle
+                fleche 135*</button>
+                <button class="list-group-item btn-light" data-toggle="modal"
+                data-target="#newFournisseur">nouvelle
+                fleche 180*</button>
+
+
+        </ul>
+    </div>
+
+
+
+
+    <%- include ../script -%>
+    <%- include ../classes -%>
+
+
+
+
+    <script>
+        $("#information").draggable()
+        
+        var x, y
+        $(document).click((ev) => {
+            $('#contextMenu').hide()
+            ev.stopPropagation()
+
+        })
+
+        $('#contextMenu').hide()
+        $("#plan").contextmenu((ev) => {
+            x = ev.clientX
+            y = ev.clientY
+            ev.preventDefault()
+            $('#contextMenu')
+                .css({
+                    'position': 'fixed',
+                    'top': ev.clientY,
+                    'left': ev.clientX,
+                })
+                .show()
+
+        })
+
+        $('#validClient').click((ev) => {
+            $(`
+            <i id="Id${x}${y}" 
+                x="${x}"
+                y="${y}"
+                commandes = "${[]}"
+                fournisseurs = "${[1, 2, 3, 5]}"
+                nom="" 
+                class="mdi-social-person green-text fa-2x client"
+                
+                ></i>
+
+            `).appendTo("body")
+                .css({
+                    'position': 'fixed',
+                    'top': y,
+                    'left': x,
+                })
+            $("#newClient").modal('hide')
+           
+
+        })
+
+        $('#validFournisseur').click((ev) => {
+            $(`
+            <i id="Id${x}${y}" 
+                x="${x}"
+                y="${y}"
+                title=""
+                produits = "${[]}"
+                nom="" 
+                class="mdi-communication-business info-text fa-2x"
+                
+                ></i>
+
+            `).appendTo("body")
+                .css({
+                    'position': 'fixed',
+                    'top': y,
+                    'left': x,
+                })
+            $("#newFournisseur").modal('hide')
+        })
+
+        var meta = angular.module("meta",[])
+        meta.controller("metaCtrl",($scope)=>{
+            $scope.nbClient=0
+            $scope.nbFournisseur=0
+            
+            $scope.addClient = ()=>{
+                $scope.nbClient++
+            }
+            $scope.addFournisseur = ()=>{
+                $scope.nbFournisseur++
+            }
+        })
+
+    </script>
+</body>
+
+
+</html>

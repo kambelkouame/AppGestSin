@@ -1,0 +1,80 @@
+<!-- Modal NEW CLIENT-->
+<div class="modal fade" id="newClient" tabindex="-1" role="dialog"
+    aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog rounded-0" role="document">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un nouveau une nouvelle voie</h5>
+
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 p-3 grey lighten-5 mb-4">
+                    <small>Veuillez entrez les informations concernant la voie
+                       </small>
+                </div>
+                <div class="">
+                    <div class="form-group">
+                        <label for="nom">ROUTE</label>
+                        <input id="nom"
+                            class="form-control-plaintext border p-2"
+                            type="text" name="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button ng-click="addClient()" type="button" id="validClient"
+                    class="btn btn-success rounded-0">Terminer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal NEW FOURNISSEUR-->
+<div class="modal fade" id="newFournisseur" tabindex="-1" role="dialog"
+    aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog rounded-0" role="document">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un nouveau Fournisseur</h5>
+
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 p-3 grey lighten-5 mb-4">
+                    <small>Veuillez entrez les informations concernant le
+                        nouveau
+                        Fournisseur</small>
+                </div>
+                <div class="">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input id="nom"
+                            class="form-control-plaintext border p-2"
+                            type="text" name="">
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Marchandise</label>
+                        <input id="nom"
+                            class="form-control-plaintext border p-2"
+                            type="text" name="">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" id="validFournisseur"
+                ng-click="addFournisseur()" 
+                    class="btn btn-secondary 
+                    rounded-0">Terminer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -75,7 +75,7 @@ if(req.cookies.infoAgent){
 
         let sql  = "select * from sinistrebdgdetails where niveau = ?"
       con.query(sql,["O/E"],(err,resultbdg,fields)=>{
-res.render('agent/sinistreP/form', { title: 'Express',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
+res.render('agent/sinistreP/form', { title: 'SIIN',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
 })
     })
     })
@@ -159,11 +159,6 @@ res.render('agent/form/gerer_sinistre', { title: 'SIIN',blocks:body, sinistres:r
   res.redirect("/connexionAgent")
 }
 });
-
-
-
-
-
 
 router.get('/deconnexion', function(req, res, next) {
   //supprimer la variable cookie user

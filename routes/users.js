@@ -320,7 +320,7 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
     const souscripteur=req.body.souscripteur;
     const type_Garantie=req.body.type_Garantie;
     const Assurance=req.body.Assurance;
-     const constat=req.body.constat;
+    const constat=req.body.constat;
    
     let sinistrevoldetails={
 
@@ -822,7 +822,7 @@ console.log(user)
 ///////////////////////////////Agent Directory///////////////////////////////////////////////////////////////////
 
 
-
+/*
 
 
 
@@ -848,7 +848,7 @@ router.get('/deconnexion', function(req, res, next) {
   //retourne la vue connexion
   res.redirect("/connexionAgent")
 });
-
+*/
 
 router.post("/loginAgent", function(req, res){
  
@@ -884,12 +884,12 @@ connexion.query('SELECT * FROM agent WHERE email = ?',[email], function (error, 
           res.redirect('/agent/home')
         } 
         else if (results[0].fonction=="policier"){
-          res.cookie("infoAgent", results[0])
+          res.cookie("infoOrdre", results[0])
          res.redirect('/ordre/home')
         }
          else if (results[0].fonction=="expert"){
          
-
+         res.cookie("infoExpert", results[0])
          res.redirect('/second/home')
         }
         else{

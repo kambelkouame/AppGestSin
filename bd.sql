@@ -23,10 +23,23 @@ CREATE TABLE `sinistrevoldetails` (
     `date_fin_cont` DATE,
     `souscripteur` VARCHAR(255),
     `type_Garantie` VARCHAR(255),
-    `Assurance` VARCHAR(255)
+    `Assurance` VARCHAR(255),
     `niveau`VARCHAR(255)
 
 	 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `constat` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `culpabilite` VARCHAR(255),
+    `uploaded_image` VARCHAR(255),
+    `nomAgent` VARCHAR(255),w
+    `prenomAgent` VARCHAR(255),
+    `numero_police` VARCHAR(255),
+    `date_declaration` DATE
+    
+
+     )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `sinistrebdgdetails` (

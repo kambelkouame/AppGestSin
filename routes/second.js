@@ -10,8 +10,8 @@ let logError = require('log-error');
 var cors = require("cors");
 var router = express.Router();
 var fetch =require('node-fetch');
-var cookieParser = require('cookie-parser')
-app.use(cookieParser())
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 
 
@@ -21,7 +21,7 @@ const con = mysql.createConnection({
     password: '',
     database: 'sinistre'
 
-})
+});
 
 router.get('/home/expertise',(req,res,next)=>{
   if(req.cookies.infoAgent){

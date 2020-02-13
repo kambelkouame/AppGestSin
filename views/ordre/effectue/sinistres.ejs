@@ -1,0 +1,46 @@
+
+        <div class="row ">
+
+<% sinistres.forEach(sinistre => { %>
+<div class="col-3 d-flex">
+    <div class="col-12 mt-3 ">
+
+         <div class="card card-chart col-12 mt-3 ">
+              <div class="card-header">
+                <h4 class="card-title"></h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                    <i class="now-ui-icons loader_gear"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Details</a>
+                    <a class="dropdown-item" href="#">Gerer le sinistre</a>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <small>culpabilite : <%= sinistre.numero_ %></small><br>
+                <small>n° police : <%= sinistre.numero_police %></small><br>
+                <small>nom de l'agent : <%= sinistre.nom %></small><br>
+                <small>Prenom de l'agent : <%= sinistre.prenom %></small><br>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://localhost:4000/uploads/<%=sinistre.uploaded_image %>" class="img-circle img-responsive"> </div>
+               
+              </div>
+              <div class="card-footer">
+           
+                
+              </div>
+            </div>
+        
+
+    </div>
+</div>
+
+<% }) %>
+</div>
+
+
+
+
+        
