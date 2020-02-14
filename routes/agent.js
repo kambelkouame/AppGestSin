@@ -32,23 +32,20 @@ if(req.cookies.infoAgent){
 
     console.log(req.cookies.infoAgent)
     let temps = new Date()
-    let sql  = "select * from sinistrevoldetails where niveau = ?"
-    con.query(sql,["O/E"],(err,result,fields)=>{
+    let sql  = "select * from sinistrevoldetails where constatAgent=? and expertAgent= ?"
+    con.query(sql,['ok','ok'],(err,result,fields)=>{
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
-     
-      let sql  = "select * from sinistreidetails where niveau = ?"
-      con.query(sql,["O/E"],(err,resulti,fields)=>{
+    
 
-        let sql  = "select * from sinistrebdgdetails where niveau = ?"
-      con.query(sql,["O/E"],(err,resultbdg,fields)=>{
-res.render('agent/sinistreP/index', { title: 'Express',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
-})
-    })
-    })
-    })
-  })
+res.render('agent/sinistreP/index', { title: 'Express',blocks:body, sinistres:result, infoAgent:req.cookies.infoAgent})
+});
+   
+      
+      })
+   })
+    
   //si la variable existe retourner la vue dashboard
       
 }else{
@@ -57,7 +54,7 @@ res.render('agent/sinistreP/index', { title: 'Express',blocks:body,sinistreV:res
 }
 });
 
-router.get('/home/sinistreP/gestion', function(req, res, next) {
+router.get('/home/sinistreP/gestion/:numero_police', function(req, res, next) {
 
 if(req.cookies.infoAgent){
   con.connect(()=>{
@@ -75,12 +72,23 @@ if(req.cookies.infoAgent){
 
         let sql  = "select * from sinistrebdgdetails where niveau = ?"
       con.query(sql,["O/E"],(err,resultbdg,fields)=>{
-res.render('agent/sinistreP/form', { title: 'SIIN',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoAgent:req.cookies.infoAgent})
+
+let sql  = "select * from constat where numero_police = ?"
+   con.query(sql,[req.params.numero_police],(err,resultconstat,fields)=>{
+
+    let sql  = "select * from expertise where numero_police = ?"
+   con.query(sql,[req.params.numero_police],(err,resultexpertise,fields)=>{
+
+
+res.render('agent/sinistreP/form', { title: 'SIIN',blocks:body,sinistreV:resulti,sinistreb:resultbdg,expertise:resultexpertise,constat:resultconstat, sinistres:result, infoAgent:req.cookies.infoAgent})
 })
     })
     })
     })
   })
+     })
+
+    })
   //si la variable existe retourner la vue dashboard
       
 }else{

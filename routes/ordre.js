@@ -111,14 +111,15 @@ if(req.cookies.infoOrdre){
 
     console.log(req.cookies.infoOrdre)
     let temps = new Date()
-    let sql  = "select * from sinistrevoldetails where niveau = ? and constat =?"
-    con.query(sql,["O/E","oui"],(err,result,fields)=>{
+    let sql  = "select * from sinistrevoldetails where constatAgent =?"
+    con.query(sql,['abs'],(err,result,fields)=>{
+      console.log(result)
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
      
-      let sql  = "select * from sinistreidetails where niveau = ? and constat =?"
-      con.query(sql,["O/E","oui"],(err,resulti,fields)=>{
+      let sql  = "select * from sinistreidetails where constatAgent =?"
+      con.query(sql,["(NULL)"],(err,resulti,fields)=>{
 
         let sql  = "select * from sinistrebdgdetails where niveau = ? and constat =?"
       con.query(sql,["O/E","oui"],(err,resultbdg,fields)=>{
@@ -154,7 +155,7 @@ console.log(req.cookies.infoOrdre)
       } else {
 
     let sql  = "INSERT INTO constat SET ?";
-    
+    let sql2 ='UPDATE sinistrevoldetails SET constatAgent =? WHERE numero_police =?' 
   
     const culpabilite=req.body.culpabilite;
     
@@ -182,6 +183,11 @@ console.log(req.cookies.infoOrdre)
     })
 
   connexion.query(sql,constat) ,( err,result)=>{
+      if(err){
+        console.log(err.message)
+      }
+    }
+    connexion.query(sql2,['ok',numero_police]) ,( err,result)=>{
       if(err){
         console.log(err.message)
       }

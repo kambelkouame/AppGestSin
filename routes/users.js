@@ -412,7 +412,7 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
 
  router.post('/home/sinistres/Dm/dmbsend',(req,res,next)=>{
 
-    let sql  = "INSERT INTO sinistrebdgdetails SET ?";
+    let sql  = "INSERT INTO sinistrevoldetails SET ?";
     
   
     const Localisation=req.body.Localisation;
@@ -528,7 +528,7 @@ router.post('/home/sinistres/Dm/dmvsend',(req,res,next)=>{
 ///////////////////////Incendie
   router.post('/home/sinistres/Dm/dmIsend',(req,res,next)=>{
 
-    let sql  = "INSERT INTO sinistreIdetails SET ?";
+    let sql  = "INSERT INTO sinistrevoldetails SET ?";
     
   
     const Localisation=req.body.Localisation;

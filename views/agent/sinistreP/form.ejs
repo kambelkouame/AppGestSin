@@ -123,7 +123,7 @@
       </nav>
       <!-- End Navbar -->
       <div class="panel-header panel-header-sm">
-       <h2>Bienvenue sur la plateforme digitale de gestion des sinistres</h2>
+      
       </div>
       
          <div class="content">
@@ -144,20 +144,16 @@
               <div class="card-header">
                 <h4 class="card-title">CONSTAT DU POLICIER</h4>
               </div>
-             
+             <% constat.forEach(constat => { %>
                
-        
+               <small>n° police : <%= constat.numero_police %></small><br>
+                <small>Nom de l'Agent : <%= constat.nomAgent %></small><br>
+                <small>Prenom de l'Agent : <%= constat.prenomAgent %></small><br>
+                <small>Date d'emission : <%= constat.date_declaration %></small><br>
+                <small>status : <%= constat.culpabilite %></small><br>
+                  <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" src="http://localhost:4000/uploads/<%=constat.uploaded_image %>" class="img-circle img-responsive"> <small>constat</small></div>
+                <% }) %>
 
-               
-         
-         
-          
-            
-              <div class="col-sm">
-                  <div class="form-group">
-                      <img src="..." class="rounded float-left" alt="...">
-                  </div>   
-              </div>
 
             </div>
           </div>
@@ -168,6 +164,15 @@
               </div>
               <div class="card-body">
                      
+               <% expertise.forEach(exp => { %>
+               
+               <small>n° police : <%= exp.numero_police %></small><br>
+                <small>date : <%= exp.nomAgent %></small><br>
+                <small>nb morts : <%= exp.prenomAgent %></small><br>
+                <small>nb blesses : <%= exp.date_declaration %></small><br>
+                <small>status : <%= exp.culpabilite %></small><br>
+                  <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" src="http://localhost:4000/expertise/<%=exp.uploaded_image %>" class="img-circle img-responsive">  <small>expertise</small></div>
+                <% }) %>
 
                    
                 

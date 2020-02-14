@@ -102,23 +102,20 @@ if(req.cookies.infoExpert){
 
     console.log(req.cookies.infoExpert)
     let temps = new Date()
-    let sql  = "select * from sinistrevoldetails where niveau = ? and constat =?"
-    con.query(sql,["O/E","oui"],(err,result,fields)=>{
+    let sql  = "select * from sinistrevoldetails where constatAgent = ?"
+    con.query(sql,["abs"],(err,result,fields)=>{
       fetch('http://localhost:5001/chain')
     .then(res => res.json())
     .then(body => {
      
-      let sql  = "select * from sinistreidetails where niveau = ? and constat =?"
-      con.query(sql,["O/E","oui"],(err,resulti,fields)=>{
+     
 
-        let sql  = "select * from sinistrebdgdetails where niveau = ? and constat =?"
-      con.query(sql,["O/E","oui"],(err,resultbdg,fields)=>{
-res.render('second/sinistres/', { title: 'SIIN',blocks:body,sinistreV:resulti,sinistreb:resultbdg, sinistres:result, infoExpert:req.cookies.infoExpert})
+  
+res.render('second/sinistres/', { title: 'SIIN',blocks:body, sinistres:result, infoExpert:req.cookies.infoExpert})
 })
     })
     })
-    })
-  })
+  
   //si la variable existe retourner la vue dashboard
       
 }else{
@@ -146,7 +143,7 @@ console.log(req.cookies.infoExpert)
       } else {
 
     let sql  = "INSERT INTO expertise SET ?";
-    
+     let sql2 ='UPDATE sinistrevoldetails SET expertAgent =? WHERE numero_police =?' 
   
    // const culpabilite=req.body.culpabilite;
      const estimation=req.body.estimation;
@@ -176,6 +173,12 @@ console.log(req.cookies.infoExpert)
     })
 
   connexion.query(sql,constat) ,( err,result)=>{
+      if(err){
+        console.log(err.message)
+      }
+    }
+
+      connexion.query(sql2,['ok',numero_police]) ,( err,result)=>{
       if(err){
         console.log(err.message)
       }
